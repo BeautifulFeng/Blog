@@ -58,15 +58,14 @@
                 <span
                   ><img
                     style="width: 40px; border-radius: 50%"
-                    src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fc-ssl.duitang.com%2Fuploads%2Fblog%2F202106%2F22%2F20210622140718_0b391.thumb.1000_0.jpg&refer=http%3A%2F%2Fc-ssl.duitang.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1682075087&t=979eb08cc4822c81d7c8ddee2b4f5ea8"
-                    alt="" /><arrow-down
+                    :src="userStore.headurl" /><arrow-down
                 /></span>
                 <template #dropdown>
                   <el-dropdown-menu>
                     <el-dropdown-item @click="GoToMyinfo"
                       >个人中心</el-dropdown-item
                     >
-                    <el-dropdown-item @click="AvatarShow = false"
+                    <el-dropdown-item @click="Outlogin"
                       >退出登录</el-dropdown-item
                     >
                   </el-dropdown-menu>
@@ -112,7 +111,7 @@
   <el-dialog
     v-model="DengluShow"
     :before-close="handleClose"
-    style="max-width: 600px"
+    style="max-width: 400px"
   >
     <div>
       <el-tabs
@@ -125,26 +124,30 @@
         <el-tab-pane label="密码登录" name="1">
           <el-form
             ref="ruleFormRef"
-            :model="ruleForm"
+            :model="userinfo"
             class="demo-ruleForm"
             inline="ture"
+            :rules="rule"
           >
             <!-- 账号密码  -->
 
             <el-form-item label="账号:" prop="username">
               <el-input
-                v-model="ruleForm.username"
+                v-model="userinfo.username"
                 type="username"
                 autocomplete="off"
               />
             </el-form-item>
             <el-form-item label="密码:" prop="password">
               <el-input
-                v-model="ruleForm.password"
+                v-model="userinfo.password"
                 type="password"
                 autocomplete="off"
               />
             </el-form-item>
+            <div style="position: absolute; right: 0; top: 6vh">
+              <el-checkbox v-model="checked1" label="记住密码" size="small" />
+            </div>
           </el-form>
         </el-tab-pane>
         <el-tab-pane label="手机登录" name="2" disabled="true">
@@ -152,9 +155,11 @@
         </el-tab-pane>
       </el-tabs>
     </div>
-    <div style="display: flex; justify-content: center; margin-right: 3vw">
-      <el-button style="color: black; width: 10vw">注册</el-button>
-      <el-button type="primary" style="color: white; width: 10vw"
+    <div style="display: flex; justify-content: center">
+      <el-button style="color: black; width: 9vw" @click="reguser"
+        >注册</el-button
+      >
+      <el-button type="primary" style="color: white; width: 9vw" @click="login"
         >登录</el-button
       >
     </div>
@@ -169,6 +174,15 @@
 <script setup>
 import { onMounted, onUnmounted, ref, reactive } from "vue";
 import router from "../router";
+import { Reguser, Login } from "../api/user";
+import { useUserStore } from "../store/user";
+import { Base64 } from "js-base64";
+
+const userStore = useUserStore();
+console.log(userStore.nickname);
+console.log(userStore.username);
+console.log(userStore.headurl);
+
 document.documentElement.scrollTop = 0;
 // 隐藏页面元素
 const SessionShow = ref(true);
@@ -290,6 +304,9 @@ onUnmounted(() => {
 });
 // 登录文本
 const AvatarShow = ref(false);
+if (userStore.token) {
+  AvatarShow.value = true;
+}
 // 登录界面
 const DengluShow = ref(false);
 // 登录处理函数 跳到登录页面
@@ -342,14 +359,68 @@ const GoToMyinfo = () => {
 };
 // form登录表单
 const ruleFormRef = ref();
-const ruleForm = reactive({
-  username: "",
-  password: "",
+const userinfo = reactive({
+  username: localStorage.getItem("GARBAGED")
+    ? Base64.decode(localStorage.getItem("GARBAGED"))
+    : "",
+  // password: "",
+  password: localStorage.getItem("GARBAGE")
+    ? Base64.decode(localStorage.getItem("GARBAGE"))
+    : "",
 });
+const rule = {
+  password: [
+    // { required: true, message: '请输入活动名称', trigger: 'blur' },
+    { min: 6, max: 12, message: "长度在 6 到 12 ", trigger: "blur" },
+  ],
+};
 const editableTabsValue = ref("1");
 // 其他方式登录
 const GoTobaidu = () => {
   window.open("https://www.baidu.com/");
+};
+// 记住密码model值
+const checked1 = ref(true);
+
+// 注册
+const reguser = async () => {
+  // console.log([...userinfo.password]);
+  if ([...userinfo.password].length < 6) {
+    return;
+  }
+  const res = await Reguser(userinfo);
+  console.log(res);
+  if (res.status === 200) {
+    ElMessage.success(res.message);
+  }
+};
+// 登录
+const login = async () => {
+  // console.log([...userinfo.password]);
+  if ([...userinfo.password].length < 6) {
+    return;
+  }
+  localStorage.setItem("GARBAGED", Base64.encode(userinfo.username));
+  const res = await Login(userinfo);
+  const data = res.data[0];
+  console.log(res);
+  if (res.status === 200) {
+    if (checked1.value === true) {
+      const password = Base64.encode(userinfo.password);
+      localStorage.setItem("GARBAGE", password);
+    } else {
+      localStorage.removeItem("GARBAGE");
+    }
+    userStore.setToken(res.token, JSON.stringify(data));
+    ElMessage.success(res.message);
+    router.go(0);
+  }
+};
+// 退出登录
+const Outlogin = () => {
+  userStore.clearToken();
+  router.go(0);
+  // AvatarShow.value =false
 };
 </script>
 
