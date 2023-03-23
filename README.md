@@ -1,9 +1,18 @@
 # 我的个人博客
 
-开发很慢哦
+为了毕业准备工作而弄得博客。
 
-## Recommended IDE Setup
+# 第一步-把仓库拉到本地
 
-- [VS Code](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
-# Blog
+```
+git clone git@github.com:BeautifulFeng/Blog.git
+npm install
+```
 
+# 第二步-启动项目
+
+```
+npm run dev
+```
+
+目前只有登录功能 后端随便写的没上传
