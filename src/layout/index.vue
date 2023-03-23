@@ -193,37 +193,25 @@ const HideDom = () => {
 };
 // 樱花类
 class CherryBlossom {
-  constructor(canvas, { x, y, size, speed }) {
+  constructor(canvas) {
     this.canvas = canvas;
     this.ctx = canvas.getContext("2d");
-    this.x = x;
-    this.y = y;
-    this.size = size;
-    this.speed = speed ? speed : Math.random() * 10 + 5;
-    this.angle = Math.random() * Math.PI * 2;
-    this.color = this.getRandomColor();
+    this.x = Math.random() * canvas.width;
+    this.y = Math.random() * canvas.height;
+    this.size = Math.random() * 4 + 1;
+    this.speedX = Math.random() * 4 - 2;
+    this.speedY = Math.random() * 3 + 1;
     this.radius = Math.random() * 10 + 5;
+    this.color = this.getRandomColor();
   }
-
   getRandomColor() {
     // const colors = ["#FFB6C1", "#FF69B4", "#FF1493"];
     const colors = ["#F8BBD0", "#FFCDD2", "#E57373", "#FF8A80", "#FF5252"];
     const index = Math.floor(Math.random() * colors.length);
     return colors[index];
   }
-  update() {
-    this.x += Math.cos(this.angle) * this.speed;
-    this.y += Math.sin(this.angle) * this.speed;
-    // 风向
-    // this.angle += Math.random() * 0.2 - 0.1;
-    // this.angle += 0.01;
-    if (this.y - this.size > this.canvas.height) {
-      this.x = Math.random() * this.canvas.width;
-      this.y = -this.size;
-    }
-  }
-
   draw() {
+    const ctx = this.ctx;
     const gradient = this.ctx.createRadialGradient(
       this.x,
       this.y,
@@ -234,74 +222,46 @@ class CherryBlossom {
     );
     gradient.addColorStop(0, this.color);
     gradient.addColorStop(1, "white");
-    this.ctx.fillStyle = gradient;
-    this.ctx.beginPath();
-    const petal = new Path2D();
-    petal.moveTo(this.x, this.y, this.size, 0, Math.PI * 1);
-    petal.bezierCurveTo(
-      this.x + this.radius * 0.6,
-      this.y - this.radius * 1.4,
-      this.x + this.radius * 1.5,
-      this.y + this.radius * 0.1,
-      this.x,
-      this.y + this.radius
-    );
-    petal.bezierCurveTo(
-      this.x - this.radius * 0.6,
-      this.y + this.radius * 1,
-      this.x - this.radius * 1.1,
-      this.y - this.radius * 0.9,
-      this.x,
-      this.y - this.radius
-      // this.x - this.radius * 0.7,
-      // this.y + this.radius * 0.5,
-      // this.x - this.radius * 0.7,
-      // this.y - this.radius * 0.9,
-      // this.x,
-      // this.y - this.radius
-    );
-    this.ctx.fill(petal);
-    this.ctx.closePath();
+    ctx.fillStyle = gradient;
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.closePath();
+  }
+  update() {
+    this.x += this.speedX;
+    this.y += this.speedY;
+    if (this.x > this.canvas.width || this.x < 0) {
+      this.speedX *= -1;
+    }
+    if (this.y > this.canvas.height) {
+      this.y = 0;
+      this.x = Math.random() * this.canvas.width;
+    }
   }
 }
 const canvas = ref(null);
-const menuref = ref();
-let cherryBlossoms = [];
-//
-const createCherryBlossom = () => {
-  for (let i = 0; i < 100; i++) {
-    const cherryBlossom = new CherryBlossom(canvas.value, {
-      x: Math.random() * canvas.value.width,
-      y: -Math.random() * canvas.value.height,
-      // size: 1,
-      size: Math.random() * 3 + 10,
-      // speed: 2.8,
-      speed: Math.random() * 3 + 0.5,
-    });
-    cherryBlossoms.push(cherryBlossom);
-  }
-};
-const animate = () => {
-  requestAnimationFrame(animate);
-  const ctx = canvas.value.getContext("2d");
-  ctx.clearRect(0, 0, canvas.value.width, canvas.value.height);
-  cherryBlossoms.forEach((cherryBlossom) => {
-    cherryBlossom.update();
-    cherryBlossom.draw();
-  });
-};
 onMounted(() => {
-  canvas.value.width = window.innerWidth;
-  canvas.value.height = window.innerHeight;
-  createCherryBlossom();
+  const width = window.innerWidth;
+  const height = window.innerHeight;
+  canvas.value.width = width;
+  canvas.value.height = height;
+  const cherryBlossoms = Array.from(
+    { length: 100 },
+    () => new CherryBlossom(canvas.value)
+  );
   const ctx = canvas.value.getContext("2d");
-  ctx.value = canvas.value.getContext("2d");
+  function animate() {
+    ctx.clearRect(0, 0, width, height);
+    for (const cherryBlossom of cherryBlossoms) {
+      cherryBlossom.update();
+      cherryBlossom.draw();
+    }
+    requestAnimationFrame(animate);
+  }
   animate();
-  //   setInterval(createCherryBlossom, 1000);
 });
-onUnmounted(() => {
-  cherryBlossoms = [];
-});
+
 // 登录文本
 const AvatarShow = ref(false);
 if (userStore.token) {
@@ -434,7 +394,8 @@ canvas {
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: -1;
+  z-index: 99;
+  pointer-events: none;
 }
 .backG {
   position: fixed;
