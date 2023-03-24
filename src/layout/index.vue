@@ -156,10 +156,13 @@
       </el-tabs>
     </div>
     <div style="display: flex; justify-content: center">
-      <el-button style="color: black; width: 9vw" @click="reguser"
+      <el-button style="color: black; width: 6.7775rem" @click="reguser"
         >注册</el-button
       >
-      <el-button type="primary" style="color: white; width: 9vw" @click="login"
+      <el-button
+        type="primary"
+        style="color: white; width: 6.7775rem"
+        @click="login"
         >登录</el-button
       >
     </div>
@@ -281,8 +284,9 @@ const LOGOref = ref();
 const listZan = ref();
 const listLogin = ref();
 // 菜单栏 吸附以及绑定scroll事件 监听滚动条
+const menuref = ref(null);
 const changeMenu = () => {
-  if (document.documentElement.scrollTop > 0) {
+  if (document.documentElement.scrollTop > 10) {
     menuref.value.style.backgroundColor = "#eeee";
     listLiuyan.value.style.color = "black";
     listHome.value.style.color = "black";
@@ -425,7 +429,7 @@ video {
   width: 100%;
   height: 60px;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
 }
 .content {
   margin-top: 1vw;
@@ -436,13 +440,13 @@ video {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-left: 1vw;
+  margin-right: 20vw;
 }
 .logo > span {
   color: #eeee;
 }
 .text {
-  margin-right: 2vw;
+  margin-left: 5vw;
   display: flex;
   justify-content: center;
   align-items: center;
