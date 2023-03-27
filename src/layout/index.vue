@@ -57,7 +57,12 @@
               <el-dropdown>
                 <span
                   ><img
-                    style="width: 40px; border-radius: 50%"
+                    style="
+                      width: 40px;
+                      height: 40px;
+                      object-fit: cover;
+                      border-radius: 50%;
+                    "
                     :src="userStore.headurl" /><arrow-down
                 /></span>
                 <template #dropdown>

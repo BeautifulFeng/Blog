@@ -1,5 +1,5 @@
 <template>
-  <div class="home">
+  <div class="home" v-infinite-scroll="load">
     <div class="card" v-for="(item, index) in menu.articleList" :key="item.id">
       <div class="left">
         <!-- 标题 -->
@@ -18,10 +18,12 @@
           <p style="margin-left: 2%">👀{{ item.likenum }}</p>
           <p style="margin-left: 2%">👍{{ item.likenum }}</p>
         </div>
+        <!-- <el-divider /> -->
       </div>
       <div class="right">
         <img class="right_img" :src="item.imgurl" />
       </div>
+      <div class="bottom"></div>
     </div>
   </div>
 </template>
@@ -40,14 +42,40 @@ const getcates = async () => {
   // console.log(articleList);
 };
 getcates();
+// 懒加载
+const load = () => {
+  console.log("load了");
+};
 </script>
 
 <style scoped>
+.infinite-list {
+  /* height: 300px; */
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+.bottom {
+  position: relative;
+  height: 24px;
+  overflow: hidden;
+  top: 120%;
+  display: flex;
+  margin-left: 1%;
+  margin-right: -1%;
+}
+.bottom::after {
+  content: "";
+  flex: 1;
+  height: 1.5px;
+  background: rgb(113, 138, 170);
+}
 .home {
   height: 100%;
   width: 60vw;
   background-color: #eeeeeef6;
   border-radius: 10px;
+  min-width: 600px;
   /* z-index: 99; */
 }
 .card {

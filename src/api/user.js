@@ -14,3 +14,11 @@ export const Login = (data) => {
     data,
   });
 };
+
+export const updateavatar = (data) => {
+  return request({
+    url: "user/upavatar",
+    method: "post",
+    data,
+  });
+};

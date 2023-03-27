@@ -57,8 +57,13 @@ export const useUserStore = defineStore("User", {
       this.headurl = JSON.parse(b).headimgurl;
       this.nickname = JSON.parse(b).nickname;
       this.username = JSON.parse(b).username;
-      console.log(localStorage.getItem("userinfo"));
+      // console.log(localStorage.getItem("userinfo"));
       // console.log(JSON.parse(localStorage.getItem("userinfo")));
+    },
+    updAvator(c) {
+      const userinfo = JSON.parse(localStorage.getItem("userinfo"));
+      userinfo.headimgurl = c;
+      this.setToken(this.token, JSON.stringify(userinfo));
     },
     clearToken() {
       localStorage.removeItem("token");
