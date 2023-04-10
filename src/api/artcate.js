@@ -6,3 +6,10 @@ export const GetCates = () => {
     method: "get",
   });
 };
+export const getArt = (data) => {
+  return request({
+    url: "artcate/art",
+    method: "post",
+    data
+  });
+};

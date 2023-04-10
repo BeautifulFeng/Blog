@@ -22,3 +22,10 @@ export const updateavatar = (data) => {
     data,
   });
 };
+export const updInfo = (data) => {
+  return request({
+    url: "user/updInfo",
+    method: "post",
+    data,
+  });
+};

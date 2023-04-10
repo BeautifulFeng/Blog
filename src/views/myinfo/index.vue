@@ -1,20 +1,21 @@
 <template>
   <div>
     <el-card>
-      <div style="text-align: center">资料设置</div>
+      <div style="text-align: center;margin-bottom: 1rem;">资料设置</div>
       <el-form :model="form">
         <el-form-item label="昵称">
           <el-input v-model="form.nickname" />
         </el-form-item>
-        <el-form-item label="密码">
+        <el-form-item label="密码" v-if="mimashow">
           <el-input v-model="form.password" />
         </el-form-item>
       </el-form>
       <div>
+        <el-button @click="updPassword">{{!mimashow? '更换密码': '取消更换'}}</el-button>
         <el-button @click="centerDialogVisible = true">更换头像</el-button>
       </div>
-      <div style="float: right; margin-bottom: 5%">
-        <el-button>保存</el-button>
+      <div style="float: right; margin-bottom: 5% ;margin-top: 1rem;">
+        <el-button @click="updateInfo">保存</el-button>
       </div>
     </el-card>
   </div>
@@ -33,6 +34,7 @@
         :before-upload="beforeAvatarUpload"
         :headers="headers"
       >
+
         <img v-if="imageUrl" :src="imageUrl" class="avatar" />
         <img
           src="https://img1.baidu.com/it/u=2279237123,3956366328&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500"
@@ -57,7 +59,7 @@
       <span class="dialog-footer">
         <el-button @click="handleClose">取消</el-button>
         <el-button type="primary" @click="handleHeadconfig">
-          Confirm
+          确定
         </el-button>
       </span>
     </template>
@@ -68,12 +70,20 @@
 import { ref, reactive } from "vue";
 import { useUserStore } from "../../store/user";
 import { ElMessage } from "element-plus";
-import { updateavatar } from "../../api/user";
+import { updateavatar,updInfo } from "../../api/user";
+
+const mimashow =ref(false)
 const userstore = useUserStore();
 const imageUrl = ref("");
 const centerDialogVisible = ref(false);
 const headers = ref({
   Authorization: localStorage.getItem("token"),
+});
+// 用户信息
+const form = reactive({
+  nickname: userstore.nickname,
+  password: "",
+  url: userstore.headurl,
 });
 // 监听图片上传成功的事件
 // const handleAvatarSuccess = (res, file) => {
@@ -88,7 +98,6 @@ const beforeAvatarUpload = (file) => {
   console.log(file);
   const isJPG = file.type === "image/jpeg" || "image/png";
   const isLt2M = file.size / 1024 / 1024 < 2;
-
   if (!isJPG) {
     ElMessage.error("上传头像图片只能是 JPG 格式!");
   }
@@ -96,6 +105,7 @@ const beforeAvatarUpload = (file) => {
     ElMessage.error("上传头像图片大小不能超过 2MB!");
   }
   return isJPG && isLt2M;
+ 
 };
 // 头像取消
 const handleClose = () => {
@@ -111,12 +121,28 @@ const handleHeadconfig = async () => {
   ElMessage.success("更换成功");
   centerDialogVisible.value = false;
 };
+// 更换密码
+const updPassword = ()=>{
+  mimashow.value= !mimashow.value
+  form.password=''
+}
+// 确定保存
+const updateInfo =async()=>{
+  // if (!form.password){
+  //   delete form.password
+  //   console.log(form);
+  // }
+  // else{console.log(form);}
+  delete form.url
+  const res = await updInfo(form)
+  console.log(res);
+  if(res.status===200){
+    userstore.updNickname(form.nickname)
+    ElMessage.success("更换成功");
+  }
 
-const form = reactive({
-  nickname: userstore.nickname,
-  password: "",
-  url: "",
-});
+  
+}
 </script>
 
 <style scoped>

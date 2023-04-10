@@ -1,6 +1,6 @@
 <template>
   <div class="home" v-infinite-scroll="load">
-    <div class="card" v-for="(item, index) in menu.articleList" :key="item.id">
+    <div class="card" v-for="(item, index) in menu.articleList" :key="item.id" @click="Lookfile(item.id)">
       <div class="left">
         <!-- 标题 -->
         <h3 style="color: #4d81ad; line-height: 0px; text-align: left">
@@ -32,6 +32,7 @@
 // import author from "/svg/作者.svg";
 import { ref, reactive } from "vue";
 import { GetCates } from "../../api/artcate";
+import router from "../../router";
 // 文章列表数据
 const articleList = [];
 let menu = reactive({ articleList });
@@ -42,6 +43,16 @@ const getcates = async () => {
   // console.log(articleList);
 };
 getcates();
+// 跳转文章页面
+const Lookfile = (id)=>{
+   console.log(id);
+   router.push({
+    path:'/ariticle',
+    query:{
+      id:id
+    }
+   })
+}
 // 懒加载
 const load = () => {
   console.log("load了");

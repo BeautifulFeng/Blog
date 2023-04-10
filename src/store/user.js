@@ -65,6 +65,11 @@ export const useUserStore = defineStore("User", {
       userinfo.headimgurl = c;
       this.setToken(this.token, JSON.stringify(userinfo));
     },
+    updNickname(a) {
+      const userinfo = JSON.parse(localStorage.getItem("userinfo"));
+      userinfo.nickname = a;
+      this.setToken(this.token, JSON.stringify(userinfo));
+    },
     clearToken() {
       localStorage.removeItem("token");
       localStorage.removeItem("userinfo");

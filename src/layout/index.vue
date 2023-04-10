@@ -358,9 +358,10 @@ const reguser = async () => {
     return;
   }
   const res = await Reguser(userinfo);
-  console.log(res);
+  // console.log(res);
   if (res.status === 200) {
     ElMessage.success(res.message);
+    login();
   }
 };
 // 登录
