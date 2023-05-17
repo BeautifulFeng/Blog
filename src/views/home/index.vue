@@ -1,13 +1,21 @@
 <template>
   <div class="home" v-infinite-scroll="load">
-    <div class="card" v-for="(item, index) in menu.articleList" :key="item.id" @click="Lookfile(item.id)">
+    <div class="card" v-for="(item, index) in menu.articleList" :key="item.id">
       <div class="left">
         <!-- 标题 -->
-        <h3 style="color: #4d81ad; line-height: 0px; text-align: left">
+        <h3
+          @click="Lookfile(item.id)"
+          style="
+            color: #4d81ad;
+            line-height: 0px;
+            text-align: left;
+            cursor: pointer;
+          "
+        >
           {{ item.title }}
         </h3>
         <!-- 内容文本 -->
-        <span class="text"> {{ item.content }}</span>
+        <span class="text" @click="Lookfile(item.id)"> {{ item.content }}</span>
         <!-- 作者-创建时间-分类-观看数-点赞数 -->
         <div style="margin-top: 0.5rem; display: flex">
           <p style="color: #e76e16">🙎‍♂️{{ item.nickname }}</p>
@@ -21,7 +29,7 @@
         <!-- <el-divider /> -->
       </div>
       <div class="right">
-        <img class="right_img" :src="item.imgurl" />
+        <img class="right_img" :src="item.imgurl" @click="Lookfile(item.id)" />
       </div>
       <div class="bottom"></div>
     </div>
@@ -44,15 +52,15 @@ const getcates = async () => {
 };
 getcates();
 // 跳转文章页面
-const Lookfile = (id)=>{
-   console.log(id);
-   router.push({
-    path:'/ariticle',
-    query:{
-      id:id
-    }
-   })
-}
+const Lookfile = (id) => {
+  console.log(id);
+  router.push({
+    path: "/ariticle",
+    query: {
+      id: id,
+    },
+  });
+};
 // 懒加载
 const load = () => {
   console.log("load了");
@@ -114,11 +122,13 @@ const load = () => {
   -webkit-line-clamp: 2;
   overflow: hidden;
   color: #949794;
+  cursor: pointer;
 }
 .right_img {
   width: 12.5rem;
   height: 8rem;
   border-radius: 5%;
   object-fit: cover;
+  cursor: pointer;
 }
 </style>

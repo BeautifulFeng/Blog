@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Prototype Design 1</title>
+    <style>
+      /* CSS样式表 */
+      body {
+        margin: 0;
+        padding: 0;
+        background-color: #f3f3f3;
+        font-family: Arial, sans-serif;
+      }
+
+      #wrapper {
+        display: flex;
+        width: 100%;
+      }
+
+      #sidebar {
+        width: 30%;
+        background-color: #444;
+        color: #fff;
+      }
+
+      #main {
+        width: 70%;
+        padding: 20px;
+        background-color: #fff;
+      }
+
+      #header {
+        background-color: #222;
+        color: #fff;
+        padding: 10px;
+        text-align: center;
+      }
+
+      #navigation {
+        margin: 20px;
+        text-align: center;
+      }
+
+      #nav-links a {
+        display: block;
+        margin: 10px 0;
+        color: #fff;
+        text-decoration: none;
+        font-size: 20px;
+        font-weight: bold;
+      }
+
+      #search-box {
+        margin: 20px;
+        padding: 10px;
+        background-color: #333;
+        border: none;
+        color: #fff;
+        font-size: 18px;
+      }
+
+      #content {
+        margin: 20px 0;
+        padding: 20px;
+        background-color: #eee;
+      }
+
+      h1 {
+        font-size: 28px;
+        text-align: center;
+      }
+
+      p {
+        font-size: 18px;
+        line-height: 1.6;
+        text-align: justify;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 页面内容 -->
+    <div id="wrapper">
+      <div id="sidebar">
+        <div id="header">
+          <h1>LOGO</h1>
+        </div>
+        <div id="navigation">
+          <div id="nav-links">
+            <a href="#">Home</a>
+            <a href="#">Profile</a>
+            <a href="#">Write</a>
+          </div>
+        </div>
+        <div id="search-box">
+          <input type="text" placeholder="Search" />
+        </div>
+      </div>
+      <div id="main">
+        <div id="content">
+          <h1>Welcome to my blog</h1>
+          <p>
+            This is my tech blog where I'll be sharing my thoughts on everything
+            from artificial intelligence to web development.
+          </p>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

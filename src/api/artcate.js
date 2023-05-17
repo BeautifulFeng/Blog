@@ -10,6 +10,20 @@ export const getArt = (data) => {
   return request({
     url: "artcate/art",
     method: "post",
-    data
+    data,
+  });
+};
+export const upimg = (data) => {
+  return request({
+    url: "artcate/upartimg",
+    method: "post",
+    data,
+  });
+};
+export const addArt = (data) => {
+  return request({
+    url: "article/add",
+    method: "post",
+    data,
   });
 };

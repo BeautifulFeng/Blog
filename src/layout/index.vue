@@ -4,7 +4,7 @@
     <canvas ref="canvas"></canvas>
     <!-- 视频背景 -->
     <div class="backG">
-      <video src="/video/20230321_182758.mp4" autoplay muted loop></video>
+      <!-- <video src="/video/20230321_182758.mp4" autoplay muted loop></video> -->
     </div>
     <!-- 导航 -->
     <div class="blogbar">
@@ -14,18 +14,28 @@
         <div class="menu" ref="menuref">
           <!-- 左侧logo -->
           <div class="logo">
-            <span ref="LOGOref" @click="HideDom"
-              >LOGO / {{ SessionShow ? "隐藏" : "显示" }}</span
-            >
+            <span @click="HideDom">
+              <button class="leftbutton" ref="LOGOref">LOGO</button>
+            </span>
+          </div>
+          <!-- 中间搜索 -->
+          <div class="search" style="background-color: pink">
+            <button></button>
           </div>
           <!-- 右侧东西 -->
           <div class="text">
             <!-- 首页 -->
-            <button style="margin-right: 1vw" ref="listHome" @click="GoHome">
+            <button
+              style="margin-right: 1vw"
+              ref="listHome"
+              @click="GoHome"
+              class="rightbutton"
+            >
               <span>首页</span>
             </button>
             <!-- 留言板 -->
             <button
+              class="rightbutton"
               style="margin-right: 1vw"
               ref="listLiuyan"
               @click="GoLiuyan"
@@ -34,13 +44,17 @@
             </button>
             <!-- 赞助 -->
             <el-dropdown>
-              <button style="margin-right: 1vw" ref="listZan">
+              <button
+                style="margin-right: 1vw"
+                ref="listZan"
+                class="rightbutton"
+              >
                 <span style="font-size: medium">赞助👍</span><arrow-down />
               </button>
               <template #dropdown>
                 <img
                   src="/img/微信图片_20230322213949.jpg"
-                  style="width: 400px"
+                  style="width: 15rem"
                 />
               </template>
             </el-dropdown>
@@ -49,11 +63,12 @@
               style="margin-right: 1vw"
               ref="listMessage"
               @click="GoUpMessage"
+              class="rightbutton"
             >
               <span>更新日志</span>
             </button>
             <!-- 登录+头像 -->
-            <div v-if="AvatarShow">
+            <div v-if="AvatarShow" class="touxiang">
               <el-dropdown>
                 <span
                   ><img
@@ -67,6 +82,9 @@
                 /></span>
                 <template #dropdown>
                   <el-dropdown-menu>
+                    <el-dropdown-item v-if="Writeshow" @click="GoWrite"
+                      >写东西</el-dropdown-item
+                    >
                     <el-dropdown-item @click="GoToMyinfo"
                       >个人中心</el-dropdown-item
                     >
@@ -93,14 +111,6 @@
     </div>
     <!-- 网易云外链 -->
     <div class="musicCloud" v-show="CloudMusicShow">
-      <!-- <iframe
-        style="width: 16.5vw; height: 40vh"
-        frameborder="no"
-        border="0"
-        marginwidth="0"
-        marginheight="0"
-        src="//music.163.com/outchain/player?type=0&id=8249683892&auto=1&height=430"
-      ></iframe> -->
       <iframe
         style="width: 10vw"
         frameborder="no"
@@ -109,9 +119,11 @@
         marginheight="0"
         width="330"
         height="86"
-        src="//music.163.com/outchain/player?type=2&id=482172&auto=1&height=66"
+        src="//music.163.com/outchain/player?type=2&id=441491410&auto=1&height=66"
       ></iframe>
     </div>
+    <!-- //music.163.com/outchain/player?type=2&id=482172&auto=1&height=66 -->
+    <!-- <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=441491410&auto=1&height=66"></iframe> -->
   </div>
   <el-dialog
     v-model="DengluShow"
@@ -187,9 +199,13 @@ import { useUserStore } from "../store/user";
 import { Base64 } from "js-base64";
 
 const userStore = useUserStore();
-console.log(userStore.nickname);
-console.log(userStore.username);
-console.log(userStore.headurl);
+const Writeshow = ref(false);
+if (userStore.username === "576652406") {
+  Writeshow.value = true;
+}
+// console.log(userStore.nickname);
+// console.log(userStore.username);
+// console.log(userStore.headurl);
 
 document.documentElement.scrollTop = 0;
 // 隐藏页面元素
@@ -326,6 +342,9 @@ const GoUpMessage = () => {
 const GoToMyinfo = () => {
   router.push("/myinfo");
 };
+const GoWrite = () => {
+  router.push("/write");
+};
 // form登录表单
 const ruleFormRef = ref();
 const userinfo = reactive({
@@ -378,17 +397,23 @@ const login = async () => {
     if (checked1.value === true) {
       const password = Base64.encode(userinfo.password);
       localStorage.setItem("GARBAGE", password);
+      // if (data.level === "博主") {
+      //   Writeshow.value = true;
+      // }
     } else {
       localStorage.removeItem("GARBAGE");
     }
     userStore.setToken(res.token, JSON.stringify(data));
     ElMessage.success(res.message);
     router.go(0);
+    // DengluShow.value = false;
   }
 };
+
 // 退出登录
 const Outlogin = () => {
   userStore.clearToken();
+  Writeshow.value = false;
   router.go(0);
   // AvatarShow.value =false
 };
@@ -414,6 +439,7 @@ canvas {
   width: 100%;
   height: 100%;
   z-index: -10;
+  background-color: black;
 }
 
 video {
@@ -447,6 +473,58 @@ video {
   justify-content: center;
   align-items: center;
   margin-right: 20vw;
+  /* font-size: inherit; */
+}
+.leftbutton {
+  overflow: hidden;
+  outline: none;
+  border: none;
+  z-index: 1;
+  position: relative;
+  outline: none;
+  border: none;
+}
+/* .leftbutton:hover {
+  cursor: pointer;
+  animation: jelly 0.5s;
+}
+
+@keyframes jelly {
+  0%,
+  100% {
+    transform: scale(1, 1);
+  }
+  25% {
+    transform: scale(0.9, 1.1);
+  }
+  50% {
+    transform: scale(1.1, 0.9);
+  }
+  75% {
+    transform: scale(0.95, 1.05);
+  }
+} */
+.leftbutton::after {
+  content: "";
+  z-index: -1;
+  background-color: hsla(0, 0%, 100%, 0.2);
+  position: absolute;
+  top: -50%;
+  bottom: -50%;
+  width: 1.25em;
+  animation: shine 1s ease-in infinite;
+}
+/* .leftbutton:hover::after {
+  transition: transform 0.75s ease-in-out;
+  transform: translate3d(200%, 0, 0) rotate(35deg);
+} */
+@keyframes shine {
+  0% {
+    transform: translate3d(-525%, 0, 0) rotate(35deg);
+  }
+  100% {
+    transform: translate3d(200%, 0, 0) rotate(35deg);
+  }
 }
 .logo > span {
   color: #eeee;
@@ -466,7 +544,43 @@ video {
 }
 button {
   color: #eeee;
+  position: relative;
+  border: none;
 }
+
+/* butto动画 */
+.rightbutton::before,
+.rightbutton::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background-color: #fc2f70;
+  transform: scaleX(0);
+  transition: transform 0.5s ease;
+}
+
+.rightbutton::before {
+  top: 0;
+  transform-origin: center right;
+}
+
+.rightbutton:hover::before {
+  transform-origin: center left;
+  transform: scaleX(1);
+}
+
+.rightbutton::after {
+  bottom: 0;
+  transform-origin: center left;
+}
+
+.rightbutton:hover::after {
+  transform-origin: center right;
+  transform: scaleX(1);
+}
+
 :focus {
   outline: 0;
 }
