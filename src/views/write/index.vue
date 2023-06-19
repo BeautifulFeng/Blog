@@ -54,7 +54,8 @@ import { reactive } from "vue";
 import { ref } from "vue";
 import { ElMessage } from "element-plus";
 import { Plus } from "@element-plus/icons-vue";
-import { upimg, addArt } from "../../api/artcate";
+import { upimg } from "../../api/artcate";
+import { addArt } from "../../api/article";
 import router from "../../router";
 const form = reactive({
   name: "",
@@ -121,7 +122,7 @@ const onSubmit = async () => {
   console.log(res);
   if (res.status === 200) {
     ElMessage.success("发布文章成功！");
-    router.push("/home");
+    router.go("/home");
   }
 };
 </script>

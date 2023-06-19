@@ -1,23 +1,13 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="UTF-8" />
-    <title>Canvas Background Demo</title>
-  </head>
-  <style>
-    #canvas {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-    }
-  </style>
-  <body>
-    <canvas id="canvas"></canvas>
-  </body>
-  <script>
-    const canvas = document.getElementById("canvas");
+<template>
+  <div>
+    <canvas ref="canvas"></canvas>
+  </div>
+</template>
+
+<script>
+export default {
+  mounted() {
+    const canvas = this.$refs.canvas;
     const ctx = canvas.getContext("2d");
 
     // 设置canvas的宽度和高度
@@ -46,8 +36,8 @@
           particle.vy = -particle.vy;
         }
       });
-
       // 绘制连线
+      ctx.globalAlpha = 0.5;
       particles.forEach((particleA, indexA) => {
         particles.slice(indexA + 1).forEach((particleB) => {
           const dx = particleA.x - particleB.x;
@@ -58,12 +48,13 @@
             ctx.beginPath();
             ctx.moveTo(particleA.x, particleA.y);
             ctx.lineTo(particleB.x, particleB.y);
+            ctx.lineWidth = 1;
             ctx.strokeStyle = "#ffffff";
             ctx.stroke();
           }
         });
       });
-
+      ctx.globalAlpha = 1;
       // 绘制粒子
       particles.forEach((particle) => {
         ctx.beginPath();
@@ -82,7 +73,8 @@
       const y = Math.random() * canvas.height;
       const vx = Math.random() * 2 - 1;
       const vy = Math.random() * 2 - 1;
-      const size = Math.random() * 4;
+      const size = 1;
+      //   const size = Math.random() * 1.6;
       const color = "#ffffff";
 
       particles.push({ x, y, vx, vy, size, color });
@@ -90,5 +82,17 @@
 
     // 调用绘制函数
     draw();
-  </script>
-</html>
+  },
+};
+</script>
+<style scoped>
+canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -99;
+  pointer-events: none;
+}
+</style>

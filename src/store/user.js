@@ -20,6 +20,10 @@ export const useUserStore = defineStore("User", {
       username: localStorage.getItem("userinfo")
         ? JSON.parse(localStorage.getItem("userinfo")).username
         : " ",
+      // id: JSON.parse(localStorage.getItem("userinfo")).id  
+      id: localStorage.getItem("userinfo")
+        ? JSON.parse(localStorage.getItem("userinfo")).id
+        : null,
     };
   },
   // getters = computed

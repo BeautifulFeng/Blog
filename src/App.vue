@@ -2,6 +2,9 @@
   <router-view></router-view>
 </template>
 
-<script setup></script>
+<script setup>
+// give me a bubble sort
+
+</script>
 
 <style></style>

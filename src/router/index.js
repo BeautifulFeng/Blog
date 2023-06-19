@@ -42,6 +42,11 @@ const routes = [
             name: "write",
             component: () => import("../views/write/index.vue"),
           },
+          {
+            path: "search",
+            name: "search",
+            component: () => import("../views/search/index.vue"),
+          },
         ],
       },
     ],

@@ -27,7 +27,7 @@ service.interceptors.response.use(
   (response) => {
     const data = response.data;
     // console.log(response);
-    if (data.status === 200) {
+    if (data.status === 200 || 201) {
       return data;
     } else {
       ElMessage.error(data.message);
