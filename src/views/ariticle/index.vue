@@ -182,10 +182,25 @@
   <div class="totop">
     <button @click="tolow">去到底部</button>
     <button @click="totop">回到顶部</button>
+    <button @click="dialogVisible = true" v-if="userid == 2">删除文章</button>
     <button style="margin-top: 20rem" @click="Addone" @click.left="liking">
       点赞文章
     </button>
   </div>
+  <el-dialog
+    v-model="dialogVisible"
+    title="提示！"
+    width="30%"
+    :before-close="handleClose"
+  >
+    <span>你确定要删除这个文章吗？</span>
+    <template #footer>
+      <span class="dialog-footer">
+        <el-button @click="dialogVisible = false">取消</el-button>
+        <el-button type="primary" @click="todelete"> 确定删除 </el-button>
+      </span>
+    </template>
+  </el-dialog>
 </template>
 
 <script setup>
@@ -195,8 +210,9 @@ import { getArt, getReply, getNickname, artliking } from "../../api/artcate";
 import router from "../../router";
 import { ElMessage } from "element-plus";
 import { useUserStore } from "../../store/user";
-import { addReplying } from "../../api/article";
+import { addReplying, artDelete } from "../../api/article";
 import { Back, ChatRound, Star } from "@element-plus/icons-vue";
+import { ElNotification } from "element-plus";
 import { throttle } from "../../assets/utils";
 const userStore = useUserStore();
 const nickname = ref(userStore.nickname);
@@ -260,6 +276,19 @@ const Addone = (e) => {
     $i.remove();
   };
 };
+//删除文章
+const userid = ref(userStore.id);
+const dialogVisible = ref(false);
+const todelete = async () => {
+  if (userid.value == 2) {
+    const res = await artDelete({ id: route.query.id });
+    dialogVisible.value = false;
+    if (res.status == 200) {
+      ElMessage.success("删除文章成功");
+      router.push("/home");
+    }
+  }
+};
 // 点赞事件的post请求
 const liking = throttle(async () => {
   await artliking({ id: route.query.id });
@@ -322,7 +351,7 @@ const changepage = (val) => {
 const goBack = () => {
   router.back();
 };
-//评论狂输入的内容
+//评论区输入的内容
 const replying = ref("");
 const replyfun = () => {
   const id = userStore.id;
@@ -344,8 +373,20 @@ const replyfun = () => {
         artid: route.query.id,
       });
       if (res.status !== 200) {
-        ElMessage.error("回复失败");
+        ElMessage({
+          showClose: true,
+          message: "发送失败.",
+          type: "error",
+          offset: 300,
+        });
       } else {
+        replying.value = "";
+        ElMessage({
+          showClose: true,
+          message: "发送成功.",
+          type: "success",
+          offset: 300,
+        });
         getreply();
       }
     };

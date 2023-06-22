@@ -122,7 +122,7 @@ const onSubmit = async () => {
   console.log(res);
   if (res.status === 200) {
     ElMessage.success("发布文章成功！");
-    router.go("/home");
+    router.push("/home");
   }
 };
 </script>

@@ -212,7 +212,6 @@ const load = () => {
     getcates();
   }
 };
-
 const upmsg = new Date();
 </script>
 
@@ -232,29 +231,7 @@ $randomNumber: random(5);
   // box-shadow:X轴偏移量 Y轴偏移量 阴影模糊半径 阴影扩展半径 阴影颜色 投影方式
   animation: shadow1 $randomNumber + s ease-in-out infinite;
 }
-/* .card1 {
-  animation: shadow1 2s ease-in-out infinite;
-}
-.card2 {
-  animation: shadow2 2.5s ease-in-out infinite;
-}
-.card3 {
-  animation: shadow3 1.5s ease-in-out infinite;
-}
-.card4 {
-  animation: shadow4 2s ease-in-out infinite;
-} */
-@keyframes shadow {
-  0% {
-    box-shadow: 0 0 10px rgba(62, 168, 238, 0.952);
-  }
-  50% {
-    box-shadow: 0 0 50px rgba(39, 105, 150, 0.952);
-  }
-  100% {
-    box-shadow: 0 0 10px rgba(62, 168, 238, 0.952);
-  }
-}
+
 @keyframes shadow1 {
   0% {
     box-shadow: 0 0 10px rgba(167, 167, 167, 0.952);
@@ -266,40 +243,6 @@ $randomNumber: random(5);
     box-shadow: 0 0 10px rgba(167, 167, 167, 0.952);
   }
 }
-@keyframes shadow2 {
-  0% {
-    box-shadow: 0 0 10px rgba(185, 241, 174, 0.952);
-  }
-  50% {
-    box-shadow: 0 0 70px rgba(128, 167, 121, 0.952);
-  }
-  100% {
-    box-shadow: 0 0 10px rgba(185, 241, 174, 0.952);
-  }
-}
-@keyframes shadow3 {
-  0% {
-    box-shadow: 0 0 10px rgba(218, 145, 252, 0.952);
-  }
-  50% {
-    box-shadow: 0 0 20px rgba(143, 94, 165, 0.952);
-  }
-  100% {
-    box-shadow: 0 0 10px rgba(218, 145, 252, 0.952);
-  }
-}
-@keyframes shadow4 {
-  0% {
-    box-shadow: 0 0 10px rgba(232, 243, 137, 0.952);
-  }
-  50% {
-    box-shadow: 0 0 50px rgba(171, 179, 100, 0.952);
-  }
-  100% {
-    box-shadow: 0 0 10px rgba(232, 243, 137, 0.952);
-  }
-}
-
 .left {
   position: absolute;
   left: 5%;
