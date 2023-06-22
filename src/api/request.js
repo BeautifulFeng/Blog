@@ -30,14 +30,14 @@ service.interceptors.response.use(
     if (data.status === 200 || 201) {
       return data;
     } else {
-      ElMessage.error(data.message);
+      // ElMessage.error(data.message);
       return Promise.reject(new Error(data.message));
       // return Promise.reject(new Error(response.message));
     }
   },
   (error) => {
     console.log(error.response);
-    error.response && ElMessage.error(error.response.data);
+    // error.response && ElMessage.error(error.response.data);
     return Promise.reject(new Error(error.response.data));
   }
 );

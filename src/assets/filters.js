@@ -1,3 +1,11 @@
+/*
+ * @Author: BeautifulFeng 11593811+beautifulfeng@user.noreply.gitee.com
+ * @Date: 2023-03-25 04:40:47
+ * @LastEditors: BeautifulFeng 11593811+beautifulfeng@user.noreply.gitee.com
+ * @LastEditTime: 2023-06-21 02:26:36
+ * @FilePath: \my-blog\src\assets\filters.js
+ * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+ */
 // const dayjs = require('dayjs')
 import dayjs from "dayjs"; // ES 2015
 const filterTimes = (val, format = "YYYY-MM-DD") => {

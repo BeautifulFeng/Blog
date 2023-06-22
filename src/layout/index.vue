@@ -124,7 +124,7 @@
                       fill="#ffffff"
                     ></path></svg></span
                 ><arrow-down />
-                <span class="menusvg">
+                <span class="menusvg zanzusvg">
                   <el-dropdown trigger="click">
                     <!-- <button style="padding: 0"> -->
                     <svg
@@ -160,41 +160,14 @@
                 />
               </template>
             </el-dropdown>
-            <!-- 更新日志 -->
-            <button @click="router.push('/upmessage')" class="rightbutton">
-              <span class="menutext">更新日志</span>
-              <span class="menusvg gengxinsvg"
-                ><svg
-                  t="1685352831039"
-                  class="icon"
-                  viewBox="0 0 1024 1024"
-                  version="1.1"
-                  xmlns="http://www.w3.org/2000/svg"
-                  p-id="2192"
-                  width="30"
-                  height="30"
-                >
-                  <path
-                    d="M618.666667 288a32 32 0 0 1 0 64H320a32 32 0 0 1 0-64h298.666667zM704 480a32 32 0 0 1 0 64H320a32 32 0 0 1 0-64h384zM533.333333 672a32 32 0 0 1 0 64H320a32 32 0 0 1 0-64h213.333333z"
-                    fill="#ffffff"
-                    p-id="2193"
-                  ></path>
-                  <path
-                    d="M768 85.333333a128 128 0 0 1 128 128v597.333334a128 128 0 0 1-128 128H256a128 128 0 0 1-128-128V213.333333a128 128 0 0 1 128-128h512z m0 64H256a64 64 0 0 0-64 64v597.333334a64 64 0 0 0 64 64h512a64 64 0 0 0 64-64V213.333333a64 64 0 0 0-64-64z"
-                    fill="#ffffff"
-                    p-id="2194"
-                  ></path>
-                </svg>
-              </span>
-            </button>
             <!-- 登录+头像 -->
             <div v-if="AvatarShow" class="touxiang">
               <el-dropdown class="headsvg">
                 <span
                   ><img
                     style="
-                      width: 40px;
-                      height: 40px;
+                      width: 2.5rem;
+                      height: 2.5rem;
                       object-fit: cover;
                       border-radius: 50%;
                     "
@@ -335,7 +308,9 @@
       </el-tabs>
     </div>
     <div style="display: flex; justify-content: center">
-      <el-button style="color: black; width: 6.7775rem" @click="reguser"
+      <el-button
+        style="background-color: #eeee; color: black; width: 6.7775rem"
+        @click="reguser"
         >注册</el-button
       >
       <el-button
@@ -492,7 +467,7 @@ const searchOK = () => {
 }
 .menu {
   width: 100%;
-  height: 60px;
+  height: 3.75rem;
   /* min-width: 900px; */
   display: flex;
   justify-content: center;
@@ -512,7 +487,7 @@ const searchOK = () => {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-right: 10vw;
+  margin-right: 15rem;
   /* font-size: inherit; */
 }
 
@@ -570,7 +545,9 @@ const searchOK = () => {
     transform: translate3d(200%, 0, 0) rotate(35deg);
   }
 }
-
+.touxiang {
+  margin-left: 1rem;
+}
 .denglubutton {
   position: relative;
   font-size: inherit;
@@ -624,7 +601,7 @@ const searchOK = () => {
 }
 
 .text {
-  margin-left: 5vw;
+  margin-left: 10vw;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -688,6 +665,7 @@ button {
 /* 搜索框 */
 .search {
   margin-top: 0.3rem;
+  /* margin-right: 5vw; */
 }
 
 .input__container {
@@ -780,7 +758,8 @@ button {
 }
 
 .zanzhubutton {
-  margin-top: 2.8px;
+  margin-top: 0.1875rem;
+  margin-left: -3px;
 }
 
 .headsvg-phone {
@@ -789,6 +768,18 @@ button {
 
 /*媒体查询 */
 @media screen and (max-width: 939px) {
+  .logo {
+    margin-right: 10vw;
+  }
+  .zanzhu {
+    display: none;
+  }
+  .zanzusvg {
+    display: block;
+  }
+}
+
+@media screen and (max-width: 530px) {
   .input__search {
     display: none;
   }
@@ -796,9 +787,6 @@ button {
   .input__container {
     width: 50px;
   }
-}
-
-@media screen and (max-width: 530px) {
   .menu {
     justify-content: unset;
   }
@@ -818,7 +806,7 @@ button {
   }
 
   .search {
-    margin: 15px 8px;
+    margin: 1rem 0.5rem;
   }
 
   .menutext {
@@ -826,7 +814,7 @@ button {
   }
 
   .rightbutton {
-    padding: 1em !important;
+    padding: 1rem !important;
   }
 
   .menusvg {
