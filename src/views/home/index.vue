@@ -179,7 +179,7 @@ const pageDate = reactive({
 });
 //
 const getcates = async () => {
-  console.log(pageDate.pageNum);
+  // console.log(pageDate.pageNum);
   const res = await GetCates({
     pageNum: pageDate.pageNum,
   });
@@ -189,11 +189,11 @@ const getcates = async () => {
   pageDate.total = res.total;
   // pageDate.pageNum = pageDate.pageNum + 1
   pageDate.pageNum += 1;
-  console.log(articleList.value, pageDate.total);
+  // console.log(articleList.value, pageDate.total);
 };
 // 跳转文章页面
 const Lookfile = async (val) => {
-  console.log(val.id);
+  // console.log(val.id);
   await artlooking({
     id: val.id,
   });

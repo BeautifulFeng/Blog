@@ -1,3 +1,11 @@
+<!--
+ * @Author: BeautifulFeng 11593811+beautifulfeng@user.noreply.gitee.com
+ * @Date: 2023-04-26 00:05:28
+ * @LastEditors: BeautifulFeng 11593811+beautifulfeng@user.noreply.gitee.com
+ * @LastEditTime: 2023-06-28 20:49:37
+ * @FilePath: \my-blog\test.html
+ * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+-->
 <!DOCTYPE html>
 <html>
   <head>
@@ -17,78 +25,68 @@
     <canvas id="canvas"></canvas>
   </body>
   <script>
-    const canvas = document.getElementById("canvas");
-    const ctx = canvas.getContext("2d");
+    // const head = {
+    //   val: 1,
+    //   next: {
+    //     val: 2,
+    //     next: {
+    //       val: 3,
+    //       next: {
+    //         val: 4,
+    //         next: null,
+    //       },
+    //     },
+    //   },
+    // };
+    // let slow = head;
+    // let fast = head;
 
-    // 设置canvas的宽度和高度
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
+    // while (fast && fast.next) {
+    //   slow = slow.next;
+    //   fast = fast.next.next;
+    // }
+    // // 此时 slow 指向链表的中间节点
+    // console.log(slow.val);
+    function invertTree(root) {
+      if (root === null) {
+        return null;
+      }
 
-    // 定义粒子数组
-    const particles = [];
+      const left = invertTree(root.left);
+      const right = invertTree(root.right);
 
-    // 定义一个绘制函数
-    function draw() {
-      // 绘制背景
-      ctx.fillStyle = "#000000";
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      root.left = right;
+      root.right = left;
 
-      // 更新粒子位置
-      particles.forEach((particle) => {
-        particle.x += particle.vx;
-        particle.y += particle.vy;
-
-        // 碰到边界反弹
-        if (particle.x < 0 || particle.x > canvas.width) {
-          particle.vx = -particle.vx;
-        }
-        if (particle.y < 0 || particle.y > canvas.height) {
-          particle.vy = -particle.vy;
-        }
-      });
-
-      // 绘制连线
-      particles.forEach((particleA, indexA) => {
-        particles.slice(indexA + 1).forEach((particleB) => {
-          const dx = particleA.x - particleB.x;
-          const dy = particleA.y - particleB.y;
-          const distance = Math.sqrt(dx * dx + dy * dy);
-
-          if (distance < 100) {
-            ctx.beginPath();
-            ctx.moveTo(particleA.x, particleA.y);
-            ctx.lineTo(particleB.x, particleB.y);
-            ctx.strokeStyle = "#ffffff";
-            ctx.stroke();
-          }
-        });
-      });
-
-      // 绘制粒子
-      particles.forEach((particle) => {
-        ctx.beginPath();
-        ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
-        ctx.fillStyle = particle.color;
-        ctx.fill();
-      });
-
-      // 请求下一帧动画
-      requestAnimationFrame(draw);
+      return root;
     }
 
-    // 初始化粒子数组
-    for (let i = 0; i < 100; i++) {
-      const x = Math.random() * canvas.width;
-      const y = Math.random() * canvas.height;
-      const vx = Math.random() * 2 - 1;
-      const vy = Math.random() * 2 - 1;
-      const size = Math.random() * 4;
-      const color = "#ffffff";
-
-      particles.push({ x, y, vx, vy, size, color });
+    const root = {
+      val: 1,
+      left: {
+        val: 2,
+        left: null,
+        right: null,
+      },
+      right: {
+        val: 3,
+        left: null,
+        right: null,
+      },
+    };
+    const text = "\ud83d\udd25你好\ud83d\udd25";
+    let decodedText = "";
+    for (let i = 0; i < text.length; i++) {
+      if (text.charCodeAt(i) >= 0xd800 && text.charCodeAt(i) <= 0xdbff) {
+        const high = text.charCodeAt(i);
+        const low = text.charCodeAt(i + 1);
+        const codePoint = (high - 0xd800) * 0x400 + (low - 0xdc00) + 0x10000;
+        decodedText += String.fromCodePoint(codePoint);
+        i++; // Skip the low surrogate
+      } else {
+        decodedText += text.charAt(i);
+      }
     }
-
-    // 调用绘制函数
-    draw();
+    console.log(decodedText);
   </script>
 </html>

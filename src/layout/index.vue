@@ -419,7 +419,7 @@ const login = async () => {
   localStorage.setItem("GARBAGED", Base64.encode(userinfo.username));
   const res = await Login(userinfo);
   const data = res.data[0];
-  console.log(res);
+  // console.log(res);
   if (res.status === 200) {
     if (checked1.value === true) {
       const password = Base64.encode(userinfo.password);

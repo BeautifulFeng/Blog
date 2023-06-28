@@ -2,7 +2,7 @@
  * @Author: BeautifulFeng 11593811+beautifulfeng@user.noreply.gitee.com
  * @Date: 2023-03-25 04:20:54
  * @LastEditors: BeautifulFeng 11593811+beautifulfeng@user.noreply.gitee.com
- * @LastEditTime: 2023-06-23 03:34:38
+ * @LastEditTime: 2023-06-29 02:41:25
  * @FilePath: \my-blog\src\api\artcate.js
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -67,6 +67,20 @@ export const artlooking = (data) => {
 export const artliking = (data) => {
   return request({
     url: "artcate/artliking",
+    method: "post",
+    data,
+  });
+};
+export const getReplyTwo = (data) => {
+  return request({
+    url: "artcate/getReplyTwo",
+    method: "post",
+    data,
+  });
+};
+export const getAuthorId = (data) => {
+  return request({
+    url: "artcate/getAuthorId",
     method: "post",
     data,
   });
