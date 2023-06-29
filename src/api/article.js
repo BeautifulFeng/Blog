@@ -42,3 +42,31 @@ export const deleteReplyTwo = (data) => {
     data,
   });
 };
+export const replygood = (data) => {
+  return request({
+    url: "article/replygood",
+    method: "post",
+    data,
+  });
+};
+export const replygoodTwo = (data) => {
+  return request({
+    url: "article/replygoodTwo",
+    method: "post",
+    data,
+  });
+};
+export const replycancelgood = (data) => {
+  return request({
+    url: "article/replycancelgood",
+    method: "post",
+    data,
+  });
+};
+export const replycancelgoodTwo = (data) => {
+  return request({
+    url: "article/replycancelgoodTwo",
+    method: "post",
+    data,
+  });
+};

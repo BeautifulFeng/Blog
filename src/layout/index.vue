@@ -74,7 +74,7 @@
             </button>
             <!-- 留言板 -->
             <button class="rightbutton" @click="router.push('/liuyan')">
-              <span class="menutext">留言板</span>
+              <span class="menutext">不知道</span>
               <span class="menusvg"
                 ><svg
                   t="1685352759602"
@@ -335,6 +335,7 @@ import { Reguser, Login } from "../api/user";
 import { useUserStore } from "../store/user";
 import { Base64 } from "js-base64";
 import BackgroundCanvas from "./background.vue";
+import { ElMessage } from "element-plus";
 // import skuraCanvas from "./skura.vue";
 
 const userStore = useUserStore();
@@ -379,14 +380,14 @@ const userinfo = reactive({
     ? Base64.decode(localStorage.getItem("GARBAGED"))
     : "",
   // password: "",
-  password: localStorage.getItem("GARBAGE")
-    ? Base64.decode(localStorage.getItem("GARBAGE"))
+  password: localStorage.getItem("ASDKJN")
+    ? Base64.decode(localStorage.getItem("ASDKJN"))
     : "",
 });
 const rule = {
   password: [
     // { required: true, message: '请输入活动名称', trigger: 'blur' },
-    { min: 6, max: 12, message: "长度在 6 到 12 ", trigger: "blur" },
+    // { min: 0, max: 12, message: "长度在 6 到 12 ", trigger: "blur" },
   ],
 };
 const editableTabsValue = ref("1");
@@ -401,6 +402,7 @@ const checked1 = ref(true);
 const reguser = async () => {
   // console.log([...userinfo.password]);
   if ([...userinfo.password].length < 6) {
+    ElMessage("密码不得少于6位");
     return;
   }
   const res = await Reguser(userinfo);
@@ -408,32 +410,39 @@ const reguser = async () => {
   if (res.status === 200) {
     ElMessage.success(res.message);
     login();
+  } else {
+    ElMessage.error(res.message);
   }
 };
 // 登录
 const login = async () => {
   // console.log([...userinfo.password]);
   if ([...userinfo.password].length < 6) {
+    ElMessage.error("密码错误");
     return;
   }
   localStorage.setItem("GARBAGED", Base64.encode(userinfo.username));
   const res = await Login(userinfo);
-  const data = res.data[0];
+  // const data = res.data[0];
   // console.log(res);
   if (res.status === 200) {
+    const data = res.data[0];
     if (checked1.value === true) {
       const password = Base64.encode(userinfo.password);
-      localStorage.setItem("GARBAGE", password);
+      localStorage.setItem("ASDKJN", password);
       // if (data.level === "博主") {
       //   Writeshow.value = true;
       // }
     } else {
-      localStorage.removeItem("GARBAGE");
+      localStorage.removeItem("ASDKJN");
+      userinfo.password = "";
     }
     userStore.setToken(res.token, JSON.stringify(data));
     ElMessage.success(res.message);
     router.go(0);
     // DengluShow.value = false;
+  } else {
+    ElMessage.error("密码错误");
   }
 };
 

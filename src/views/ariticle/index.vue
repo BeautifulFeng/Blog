@@ -295,23 +295,47 @@ const getreply = async () => {
     pageDate.pageTotal = res.total;
     const userIds = res.data.map((item) => item.user_id); // 获取所有用户的id
     const users = await getNickname(userIds); // 查询所有用户的昵称
-    // console.log(users);
+    console.log(userIds);
     reply.value = res.data.map((item) => {
       const user = users.data.find((u) => u.id === item.user_id); // 查找当前回复的用户
       const imgurl =
         users.data.find((u) => u.id === item.user_id)?.headimgurl ||
         "https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fsafe-img.xhscdn.com%2Fbw1%2F4bc638ef-a1b1-4fbb-bce8-e9184387d798%3FimageView2%2F2%2Fw%2F1080%2Fformat%2Fjpg&refer=http%3A%2F%2Fsafe-img.xhscdn.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1687972272&t=332aa322b014a1f0514f16b0a5678944";
       // console.log(imgurl);
-      return {
-        id: item.id,
-        text: item.text,
-        time: item.time,
-        reply: item.reply,
-        good: item.good,
-        user_id: user ? user.nickname : "未知用户", // 如果找到了用户，返回用户的昵称；否则，返回“未知用户”
-        imgurl: imgurl,
-        level: user ? user.level : "游客",
-      };
+      // 将字符串转换为数组
+      // console.log(item.good_userid);
+      const goodUserIds = item.good_userid.split(",");
+      // 判断当前用户的id是否在数组中
+      if (userStore.id) {
+        const currentUser = userStore.id.toString();
+        // console.log(goodUserIds, currentUser);
+        const isCurrentUserGood = goodUserIds.includes(currentUser);
+        // 输出结果
+        // console.log(isCurrentUserGood); // true 或者 false
+        return {
+          id: item.id,
+          text: item.text,
+          time: item.time,
+          reply: item.reply,
+          good: item.good,
+          user_id: user ? user.nickname : "未知用户", // 如果找到了用户，返回用户的昵称；否则，返回“未知用户”
+          imgurl: imgurl,
+          level: user ? user.level : "游客",
+          goodshow: isCurrentUserGood,
+        };
+      } else {
+        return {
+          id: item.id,
+          text: item.text,
+          time: item.time,
+          reply: item.reply,
+          good: item.good,
+          user_id: user ? user.nickname : "未知用户", // 如果找到了用户，返回用户的昵称；否则，返回“未知用户”
+          imgurl: imgurl,
+          level: user ? user.level : "游客",
+          goodshow: false,
+        };
+      }
     });
   }
 };

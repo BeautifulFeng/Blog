@@ -2,7 +2,7 @@
  * @Author: BeautifulFeng 11593811+beautifulfeng@user.noreply.gitee.com
  * @Date: 2023-05-22 22:44:24
  * @LastEditors: BeautifulFeng 11593811+beautifulfeng@user.noreply.gitee.com
- * @LastEditTime: 2023-06-29 00:49:33
+ * @LastEditTime: 2023-06-29 18:35:37
  * @FilePath: \my-blog\src\views\search\index.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -95,11 +95,11 @@ $randomNumber: random(5);
     <div class="card" v-for="(item, index) in listdata" :key="item.id">
       <div class="left">
         <!-- 标题 -->
-        <span @click="Lookfile(item.id)" class="timu">
+        <span @click="Lookfile(item)" class="timu">
           {{ item.title }}
         </span>
         <!-- 内容文本 -->
-        <span class="text" @click="Lookfile(item.id)"> {{ item.content }}</span>
+        <span class="text" @click="Lookfile(item)"> {{ item.content }}</span>
         <!-- 作者-创建时间-分类-观看数-点赞数 -->
         <div class="xiangqing">
           <span
@@ -223,7 +223,7 @@ $randomNumber: random(5);
         <!-- <el-divider /> -->
       </div>
       <div class="right">
-        <img class="right_img" :src="item.imgurl" @click="Lookfile(item.id)" />
+        <img class="right_img" :src="item.imgurl" @click="Lookfile(item)" />
       </div>
     </div>
     <!-- <div class="rili"></div> -->
@@ -241,7 +241,7 @@ const val = ref(route.query.val);
 const listdata = ref([]);
 const search = async (a) => {
   const res = await searchart(a ? a : { val: val.value });
-  // console.log(res);
+  console.log(res);
   listdata.value = res.data;
   // console.log(listdata.value);
 };
@@ -254,12 +254,14 @@ watch(
     // console.log('val发生了变化');
   }
 );
-const Lookfile = (id) => {
+const Lookfile = (val) => {
   // console.log(id);
   router.push({
     path: "/ariticle",
     query: {
-      id: id,
+      id: val.id,
+      look: val.looknum,
+      liek: val.likenum,
     },
   });
 };
