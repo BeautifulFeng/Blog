@@ -14,79 +14,177 @@
   </head>
   <style>
     #canvas {
-      position: fixed;
+      /* position: absolute;
       top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
+      left: 0; */
+      background-color: brown;
+      /* width: 100%;
+      height: 100%; */
+      width: 100vmin;
+      height: 100vmax;
+    }
+    .box {
+      display: flex;
+      height: 100px;
+    }
+    .left {
+      background-color: aquamarine;
+      flex-grow: 1;
+    }
+
+    .middle {
+      background-color: rgb(180, 82, 219);
+      flex-grow: 5;
+    }
+
+    .right {
+      background-color: rgb(221, 176, 79);
+      flex-grow: 1;
+    }
+    .father {
+      width: 500px;
+      height: 300px;
+      border: 1px solid #0a3b98;
+      position: relative;
+    }
+    .son {
+      width: 100px;
+      height: 40px;
+      background: #f0a238;
+      box-sizing: border-box;
+      position: absolute;
+      inset: 0;
+      margin: auto;
     }
   </style>
+
   <body>
-    <canvas id="canvas"></canvas>
+    <!-- <div id="canvas"></div> -->
+    <div class="box">
+      <div class="left">左</div>
+      <div class="middle">中</div>
+      <div class="right">右</div>
+    </div>
+    <div class="father">
+      <div class="son"></div>
+    </div>
   </body>
   <script>
-    // const head = {
-    //   val: 1,
-    //   next: {
-    //     val: 2,
-    //     next: {
-    //       val: 3,
-    //       next: {
-    //         val: 4,
-    //         next: null,
-    //       },
-    //     },
+    // console.log(1);
+
+    // setTimeout(() => {
+    //   console.log(2);
+    // }, 0);
+
+    // new Promise((resolve, reject) => {
+    //   console.log("new Promise");
+    //   resolve();
+    // }).then(() => {
+    //   console.log("then");
+    // });
+    // console.log(3);
+
+    // async function fn1() {
+    //   console.log(1);
+    //   await fn2();
+    //   console.log(2); // 阻塞
+    // }
+    // async function fn2() {
+    //   console.log("fn2");
+    // }
+    // fn1();
+    // console.log(3);
+
+    // async function async1() {
+    //   console.log("async1 start");
+    //   await async2();
+    //   console.log("async1 end");
+    // }
+    // async function async2() {
+    //   console.log("async2");
+    // }
+    // console.log("script start");
+    // setTimeout(function () {
+    //   console.log("settimeout");
+    // });
+    // async1();
+    // new Promise(function (resolve) {
+    //   console.log("promise1");
+    //   resolve();
+    // }).then(function () {
+    //   console.log("promise2");
+    // });
+    // console.log("script end");
+
+    // var _a = 0;
+    // Object.defineProperty(this, "a", {
+    //   get: function () {
+    //     return ++_a;
+    //   },
+    // });
+    // console.log(a === 1 && a === 2 && a === 3);
+
+    // var m = 0,
+    //   n = 19; // 把 m,n,add() 标记为进入环境。
+    // add(m, n); // 把 a, b, c标记为进入环境。
+    // console.log(n); // a,b,c标记为离开环境，等待垃圾回收。
+    // function add(a, b) {
+    //   a++;
+    //   var c = a + b;
+    //   return c;
+    // }
+    // function mynew(fn, ...args) {
+    //   let obj = {};
+    //   obj._proto_ = fn.prototype;
+    //   let result = fn.apply(obj, args);
+    //   return result instanceof Object ? result : obj;
+    // }
+    // function myperson(name, age) {
+    //   this.name = name;
+    //   this.age = age;
+    //   myperson.prototype.say = function () {
+    //     console.log(this.name, "的age是", this.age);
+    //   };
+    // }
+    // let p = mynew(myperson, "huihui", 26);
+    // console.log(p);
+    // // console.log(p.say);
+    // p.say();
+
+    // var _a = 0;
+    // Object.defineProperty(this, "a", {
+    //   get: function () {
+    //     return ++_a;
+    //   },
+    // });
+    // console.log(a == 1 && a == 2 && a == 3);
+
+    // const b = {
+    //   i: 1,
+    //   // toString: function () {
+    //   //   return this.i++;
+    //   // },
+    //   valueOf() {
+    //     return this.i++;
     //   },
     // };
-    // let slow = head;
-    // let fast = head;
+    // console.log(b == 1 && b == 2 && b == 3);
 
-    // while (fast && fast.next) {
-    //   slow = slow.next;
-    //   fast = fast.next.next;
+    // var _a = 0;
+    // Object.defineProperty(this, "a", {
+    //   get: function () {
+    //     return ++_a;
+    //   },
+    // });
+    // console.log(a == 1 && a == 2 && a == 3);
+
+    // function mybind(thisarg, ...args) {
+    //   const orginFunc = this;
+    //   return function boundFunction() {
+    //     return orginFunc.apply(thisarg, args);
+    //   };
     // }
-    // // 此时 slow 指向链表的中间节点
-    // console.log(slow.val);
-    function invertTree(root) {
-      if (root === null) {
-        return null;
-      }
-
-      const left = invertTree(root.left);
-      const right = invertTree(root.right);
-
-      root.left = right;
-      root.right = left;
-
-      return root;
-    }
-
-    const root = {
-      val: 1,
-      left: {
-        val: 2,
-        left: null,
-        right: null,
-      },
-      right: {
-        val: 3,
-        left: null,
-        right: null,
-      },
-    };
-    const text = "\ud83d\udd25你好\ud83d\udd25";
-    let decodedText = "";
-    for (let i = 0; i < text.length; i++) {
-      if (text.charCodeAt(i) >= 0xd800 && text.charCodeAt(i) <= 0xdbff) {
-        const high = text.charCodeAt(i);
-        const low = text.charCodeAt(i + 1);
-        const codePoint = (high - 0xd800) * 0x400 + (low - 0xdc00) + 0x10000;
-        decodedText += String.fromCodePoint(codePoint);
-        i++; // Skip the low surrogate
-      } else {
-        decodedText += text.charAt(i);
-      }
-    }
-    console.log(decodedText);
+    const a = new Date();
+    console.log(a);
   </script>
 </html>

@@ -30,7 +30,7 @@
         <el-form-item label="文章封面">
           <el-upload
             class="avatar-uploader"
-            action="http://127.0.0.1:5177/artcate/upartimg"
+            action="http://114.132.188.196:5177/artcate/upartimg"
             :show-file-list="false"
             :on-success="handleAvatarSuccess"
             :before-upload="beforeAvatarUpload"

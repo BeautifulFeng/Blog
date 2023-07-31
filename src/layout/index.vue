@@ -74,7 +74,7 @@
             </button>
             <!-- 留言板 -->
             <button class="rightbutton" @click="router.push('/liuyan')">
-              <span class="menutext">不知道</span>
+              <span class="menutext">留言板</span>
               <span class="menusvg"
                 ><svg
                   t="1685352759602"

@@ -6,15 +6,25 @@ import { ElementPlusResolver } from "unplugin-vue-components/resolvers";
 import postcssImport from "postcss-import";
 import autoprefixer from "autoprefixer";
 import postCssPxToRem from "postcss-pxtorem";
+import viteCompression from "vite-plugin-compression";
+import vueDevTools from "vite-plugin-vue-devtools";
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
     vue(),
+    vueDevTools(),
     AutoImport({
       resolvers: [ElementPlusResolver()],
     }),
     Components({
       resolvers: [ElementPlusResolver()],
+    }),
+    viteCompression({
+      verbose: true,
+      disable: false,
+      threshold: 10240,
+      algorithm: "gzip",
+      ext: ".gz",
     }),
   ],
   server: {
@@ -44,6 +54,16 @@ export default defineConfig({
           unitPrecision: 5, // 转换后的小数位数
         }),
       ],
+    },
+  },
+  build: {
+    minify: "terser",
+    terserOptions: {
+      compress: {
+        //生产环境时移除console
+        drop_console: true,
+        drop_debugger: true,
+      },
     },
   },
 });
