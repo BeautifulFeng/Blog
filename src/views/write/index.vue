@@ -30,7 +30,7 @@
         <el-form-item label="文章封面">
           <el-upload
             class="avatar-uploader"
-            action="http://114.132.188.196:5177/artcate/upartimg"
+            :action="uploadurl"
             :show-file-list="false"
             :on-success="handleAvatarSuccess"
             :before-upload="beforeAvatarUpload"
@@ -57,6 +57,9 @@ import { Plus } from "@element-plus/icons-vue";
 import { upimg } from "../../api/artcate";
 import { addArt } from "../../api/article";
 import router from "../../router";
+// 上传地址
+const uploadurl = `${import.meta.env.VITE_PUBLIC_PATH}/artcate/upartimg`;
+console.log(uploadurl);
 const form = reactive({
   name: "",
   text: "",

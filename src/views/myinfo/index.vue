@@ -30,7 +30,7 @@
     <div style="display: flex">
       <el-upload
         class="avatar-uploader"
-        action="http://114.132.188.196:5177/user/upimg"
+        :action="uploadurl"
         :show-file-list="false"
         :on-success="handleAvatarSuccess"
         :before-upload="beforeAvatarUpload"
@@ -70,7 +70,7 @@ import { ref, reactive } from "vue";
 import { useUserStore } from "../../store/user";
 import { ElMessage } from "element-plus";
 import { updateavatar, updInfo } from "../../api/user";
-
+const uploadurl = `${import.meta.env.VITE_PUBLIC_PATH}/user/upimg`;
 const mimashow = ref(false);
 const userstore = useUserStore();
 const imageUrl = ref("");

@@ -8,6 +8,7 @@ import autoprefixer from "autoprefixer";
 import postCssPxToRem from "postcss-pxtorem";
 import viteCompression from "vite-plugin-compression";
 import vueDevTools from "vite-plugin-vue-devtools";
+import imagemin from "unplugin-imagemin/vite";
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
@@ -26,15 +27,45 @@ export default defineConfig({
       algorithm: "gzip",
       ext: ".gz",
     }),
+    imagemin(),
+    // imagemin({
+    //   // Default mode squoosh. support squoosh and sharp
+    //   mode: "sharp",
+    //   // Default configuration options for compressing different pictures
+    //   compress: {
+    //     jpg: {
+    //       quality: 70,
+    //     },
+    //     jpeg: {
+    //       quality: 70,
+    //     },
+    //     png: {
+    //       quality: 70,
+    //     },
+    //     webp: {
+    //       quality: 70,
+    //     },
+    //   },
+    //   // The type of picture converted after the build
+    //   conversion: [
+    //     { from: "png", to: "jpeg" },
+    //     { from: "jpeg", to: "webp" },
+    //   ],
+    // }),
   ],
   server: {
-    // proxy: {
-    //   "/api": {
-    //     target: "http://127.0.0.1:5177",
-    //     changeOrigin: true,
-    //     // rewrite: (path) => path.replace(/^\/api/, ""),
-    //   },
-    // },
+    proxy: {
+      "/api": {
+        target: "http://127.0.0.1:5177",
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api/, ""),
+      },
+      "/api-prod": {
+        target: "http://114.132.188.196:5177/",
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api-prod/, ""),
+      },
+    },
   },
   css: {
     preprocessorOptions: {

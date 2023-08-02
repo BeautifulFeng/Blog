@@ -1,5 +1,6 @@
 import { defineStore } from "pinia";
-// import { useOtherStore } from './other-store'  其他store
+import { setTokenTime } from "../assets/auth";
+// import { useOtherStore } from './other-store';
 
 export const useUserStore = defineStore("User", {
   // 推荐使用 完整类型推断的箭头函数
@@ -20,7 +21,7 @@ export const useUserStore = defineStore("User", {
       username: localStorage.getItem("userinfo")
         ? JSON.parse(localStorage.getItem("userinfo")).username
         : " ",
-      // id: JSON.parse(localStorage.getItem("userinfo")).id  
+      // id: JSON.parse(localStorage.getItem("userinfo")).id
       id: localStorage.getItem("userinfo")
         ? JSON.parse(localStorage.getItem("userinfo")).id
         : null,
@@ -57,6 +58,7 @@ export const useUserStore = defineStore("User", {
     setToken(a, b) {
       localStorage.setItem("token", a);
       localStorage.setItem("userinfo", b);
+      setTokenTime();
       this.token = a;
       this.headurl = JSON.parse(b).headimgurl;
       this.nickname = JSON.parse(b).nickname;
@@ -77,6 +79,7 @@ export const useUserStore = defineStore("User", {
     clearToken() {
       localStorage.removeItem("token");
       localStorage.removeItem("userinfo");
+      localStorage.removeItem("TOKEN_TIME");
     },
     randomizeCounter() {
       this.counter = Math.round(100 * Math.random());
