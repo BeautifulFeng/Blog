@@ -14,11 +14,16 @@ const imgsUrl = ref([
   //   "../../public/img/4.jpg",
   //   "../../public/img/5.jpg",
   //   "../../public/img/6.jpg",
-  "../../../../public/img/00021.png",
-  "../../../../public/img/00023.png",
-  "../../../../public/img/00024.png",
-  "../../../../public/img/00025.png",
-  "../../../../public/img/00026.png",
+  // "../../../../public/img/00021.png",
+  // "../../../../public/img/00023.png",
+  // "../../../../public/img/00024.png",
+  // "../../../../public/img/00025.png",
+  // "../../../../public/img/00026.png",
+  "/img/00021.png",
+  "/img/00023.png",
+  "/img/00024.png",
+  "/img/00025.png",
+  "/img/00026.png",
 ]);
 const radius = ref(1);
 

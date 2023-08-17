@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-infinite-scroll="load" :infinite-scroll-disabled="disabled">
     <keep-alive>
       <lizi></lizi>
     </keep-alive>
@@ -34,11 +34,7 @@
       </div>
     </div>
     <div class="bkg" id="bkg">
-      <div
-        class="home"
-        v-infinite-scroll="load"
-        :infinite-scroll-disabled="disabled"
-      >
+      <div class="home">
         <div
           :class="`card card${index}`"
           v-for="(item, index) in articleList"
@@ -308,6 +304,7 @@ const Lookfile = async (val) => {
 getcates();
 // 懒加载
 const load = () => {
+  console.log(1);
   if (pageDate.pageNum == 1) {
     getcates();
   } else if (pageDate.pageNum < pageDate.total + 1) {
