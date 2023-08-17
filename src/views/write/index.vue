@@ -1,51 +1,53 @@
 <template>
-  <div class="home">
-    <el-card style="margin-bottom: 0.3rem">
-      <v-md-editor
-        v-model="form.text"
-        :disabled-menus="[]"
-        @upload-image="handleUploadImage"
-        height="500px"
-      />
-    </el-card>
-    <el-card class="card">
-      <el-form :model="form" label-width="120px">
-        <el-form-item label="文章名称">
-          <el-input v-model="form.name" />
-        </el-form-item>
-        <el-form-item label="文章类型">
-          <el-select v-model="form.type" placeholder="请选择">
-            <el-option
-              v-for="item in options"
-              :key="item.value"
-              :label="item.label"
-              :value="item.value"
+  <div class="bkg">
+    <div class="home">
+      <el-card style="margin-bottom: 0.3rem">
+        <v-md-editor
+          v-model="form.text"
+          :disabled-menus="[]"
+          @upload-image="handleUploadImage"
+          height="500px"
+        />
+      </el-card>
+      <el-card class="card">
+        <el-form :model="form" label-width="120px">
+          <el-form-item label="文章名称">
+            <el-input v-model="form.name" />
+          </el-form-item>
+          <el-form-item label="文章类型">
+            <el-select v-model="form.type" placeholder="请选择">
+              <el-option
+                v-for="item in options"
+                :key="item.value"
+                :label="item.label"
+                :value="item.value"
+              >
+              </el-option>
+            </el-select>
+          </el-form-item>
+          <el-form-item label="文章简述">
+            <el-input v-model="form.content" />
+          </el-form-item>
+          <el-form-item label="文章封面">
+            <el-upload
+              class="avatar-uploader"
+              :action="uploadurl"
+              :show-file-list="false"
+              :on-success="handleAvatarSuccess"
+              :before-upload="beforeAvatarUpload"
             >
-            </el-option>
-          </el-select>
-        </el-form-item>
-        <el-form-item label="文章简述">
-          <el-input v-model="form.content" />
-        </el-form-item>
-        <el-form-item label="文章封面">
-          <el-upload
-            class="avatar-uploader"
-            :action="uploadurl"
-            :show-file-list="false"
-            :on-success="handleAvatarSuccess"
-            :before-upload="beforeAvatarUpload"
-          >
-            <img v-if="form.url" :src="form.url" class="avatar" />
-            <!-- <i v-else class="el-icon-plus avatar-uploader-icon"></i> -->
-            <el-icon v-else class="avatar-uploader-icon"><Plus /></el-icon>
-          </el-upload>
-        </el-form-item>
-        <el-form-item>
-          <el-button type="primary" @click="onSubmit">确定发布</el-button>
-          <el-button>取消</el-button>
-        </el-form-item>
-      </el-form>
-    </el-card>
+              <img v-if="form.url" :src="form.url" class="avatar" />
+              <!-- <i v-else class="el-icon-plus avatar-uploader-icon"></i> -->
+              <el-icon v-else class="avatar-uploader-icon"><Plus /></el-icon>
+            </el-upload>
+          </el-form-item>
+          <el-form-item>
+            <el-button type="primary" @click="onSubmit">确定发布</el-button>
+            <el-button>取消</el-button>
+          </el-form-item>
+        </el-form>
+      </el-card>
+    </div>
   </div>
 </template>
 
@@ -131,6 +133,12 @@ const onSubmit = async () => {
 </script>
 
 <style>
+.bkg {
+  margin-top: 1vw;
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
 .home {
   height: 100%;
   width: 60vw;

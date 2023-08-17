@@ -47,7 +47,7 @@
   background-image: linear-gradient(
     0deg,
     #f8f3f3 0,
-    rgba(198, 225, 252, 0) 100%
+    /* #333333 100, */ rgba(198, 225, 252, 0) 100%
   );
 }
 .up-content {
@@ -55,6 +55,7 @@
 }
 .widget-mission-footer {
   background: #ffffff;
+  border-radius: 0 0 10px 10px;
 }
 .widget-mission-footer a {
   padding: 10px;
@@ -68,21 +69,23 @@
 </style>
 
 <template>
-  <div class="up-back">
-    <div>
-      <p style="color: #1e73be">嗨！朋友</p>
-      <p>所有的勇敢，都源于一个勇敢的开始</p>
+  <div>
+    <div class="up-back">
+      <div>
+        <p style="color: #1e73be">2023-8-17</p>
+        <p>新增主页canvas动画，loading效果，优化体验</p>
+      </div>
+
+      <div class="up-content">
+        <div>
+          <p style="color: #1e73be">嗨！朋友</p>
+          <p>所有的勇敢，都源于一个勇敢的开始</p>
+        </div>
+      </div>
     </div>
-    <!-- <div>
-      <el-button type="primary">登录</el-button>
-    </div> -->
-    <div class="up-content">
-      <!-- <div>时间</div>
-      <div>事件</div> -->
+    <div class="widget-mission-footer" bis_skin_checked="1">
+      <a href="" target="_blank" onclick="event.preventDefault()">全部公告</a>
     </div>
-  </div>
-  <div class="widget-mission-footer" bis_skin_checked="1">
-    <a href="" target="_blank" onclick="event.preventDefault()">全部公告</a>
   </div>
 </template>
 

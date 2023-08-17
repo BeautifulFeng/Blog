@@ -1,162 +1,231 @@
 <template>
-  <div class="home">
-    <div class="contentbody">
-      <div class="art-head">
-        <button @click="goBack">
-          <el-icon :size="25">
-            <Back />
-          </el-icon>
-        </button>
-        <span style="float: right; margin: 1rem 1rem"
-          >阅读量:{{ $route.query.look }}</span
-        >
-      </div>
-      <h2 style="text-align: center; color: #4d81ad">{{ title }}</h2>
-      <!-- 文章内容样式 -->
-      <v-md-preview :text="text"></v-md-preview>
-    </div>
-    <!-- 评论区 -->
-    <div class="editor">
-      <!-- <v-md-editor v-model="replytext" height="200px" mode="edit"></v-md-editor> -->
-      <el-card>
-        <div class="commentform">
-          <el-input
-            v-model="replying"
-            :rows="3"
-            type="textarea"
-            placeholder="一个神评的机会"
-            class="comment_content"
-            resize="none"
-            input-style="font-size: 1.3rem;"
-          />
-          <div
-            style="
-              display: flex;
-              justify-content: space-between;
-              padding-bottom: 6px;
-            "
+  <div class="bkg">
+    <div class="home">
+      <div class="contentbody">
+        <div class="art-head">
+          <button @click="goBack">
+            <el-icon :size="25">
+              <Back />
+            </el-icon>
+          </button>
+          <span style="float: right; margin: 1rem 1rem"
+            >阅读量:{{ $route.query.look }}</span
           >
-            <!-- 表情 -->
-            <el-dropdown trigger="click">
-              <div class="biaoqing">
-                <svg
-                  t="1687882510654"
-                  class="icon"
-                  viewBox="0 0 1024 1024"
-                  version="1.1"
-                  xmlns="http://www.w3.org/2000/svg"
-                  p-id="2523"
-                  width="32"
-                  height="32"
-                >
-                  <path
-                    d="M318.85312 401.08032h102.0928v40.96h-102.0928zM603.05408 401.08032h102.11328v40.96h-102.11328z"
-                    fill=""
-                    p-id="2524"
-                  ></path>
-                  <path
-                    d="M511.97952 867.84c-196.1984 0-355.81952-159.62112-355.81952-355.84S315.78112 156.16 511.97952 156.16c196.21888 0 355.86048 159.62112 355.86048 355.84S708.1984 867.84 511.97952 867.84z m0-670.72C338.35008 197.12 197.12 338.37056 197.12 512s141.23008 314.88 314.85952 314.88c173.64992 0 314.90048-141.23008 314.90048-314.88S685.62944 197.12 511.97952 197.12z"
-                    fill=""
-                    p-id="2525"
-                  ></path>
-                  <path
-                    d="M511.97952 732.63104c-97.11616 0-176.128-78.99136-176.128-176.14848h40.96a135.33184 135.33184 0 0 0 135.168 135.18848 135.3728 135.3728 0 0 0 135.20896-135.18848h40.96c0 97.15712-79.03232 176.14848-176.16896 176.14848z"
-                    fill=""
-                    p-id="2526"
-                  ></path>
-                </svg>
-              </div>
-              <template #dropdown>
-                <!-- <el-dropdown-menu> -->
-                <div class="comment-smile-box b2-show" bis_skin_checked="1">
-                  <button class="text smily-button" @click="insertEmoji('😁')">
-                    😁</button
-                  ><button class="text smily-button" @click="insertEmoji('😊')">
-                    😊</button
-                  ><button class="text smily-button" @click="insertEmoji('😎')">
-                    😎</button
-                  ><button class="text smily-button" @click="insertEmoji('😤')">
-                    😤</button
-                  ><button class="text smily-button" @click="insertEmoji('😥')">
-                    😥</button
-                  ><button class="text smily-button" @click="insertEmoji('😂')">
-                    😂</button
-                  ><button class="text smily-button" @click="insertEmoji('😍')">
-                    😍</button
-                  ><button class="text smily-button" @click="insertEmoji('😏')">
-                    😏</button
-                  ><button class="text smily-button" @click="insertEmoji('😙')">
-                    😙</button
-                  ><button class="text smily-button" @click="insertEmoji('😟')">
-                    😟</button
-                  ><button class="text smily-button" @click="insertEmoji('😖')">
-                    😖</button
-                  ><button class="text smily-button" @click="insertEmoji('😜')">
-                    😜</button
-                  ><button class="text smily-button" @click="insertEmoji('😱')">
-                    😱</button
-                  ><button class="text smily-button" @click="insertEmoji('😲')">
-                    😲</button
-                  ><button class="text smily-button" @click="insertEmoji('😭')">
-                    😭</button
-                  ><button class="text smily-button" @click="insertEmoji('😚')">
-                    😚</button
-                  ><button class="text smily-button" @click="insertEmoji('💀')">
-                    💀</button
-                  ><button class="text smily-button" @click="insertEmoji('👻')">
-                    👻</button
-                  ><button class="text smily-button" @click="insertEmoji('👍')">
-                    👍</button
-                  ><button class="text smily-button" @click="insertEmoji('💪')">
-                    💪</button
-                  ><button class="text smily-button" @click="insertEmoji('👊')">
-                    👊
-                  </button>
-                </div>
-                <!-- </el-dropdown-menu> -->
-              </template>
-            </el-dropdown>
-            <!-- 回复 -->
-            <el-button @click="replyfun" type="danger" round>评论</el-button>
-          </div>
         </div>
-      </el-card>
-      <!-- 回复展示区 -->
-      <div class="pinglun">
+        <h2 style="text-align: center; color: #4d81ad">{{ title }}</h2>
+        <!-- 文章内容样式 -->
+        <v-md-preview :text="text"></v-md-preview>
+      </div>
+      <!-- 评论区 -->
+      <div class="editor">
+        <!-- <v-md-editor v-model="replytext" height="200px" mode="edit"></v-md-editor> -->
         <el-card>
-          <!-- 题目 -->
-          <span>评论</span>
-          <el-divider style="margin-top: 0.75rem" />
-          <!-- 主体内容 -->
-          <Forum
-            class="Forum"
-            v-for="item in reply"
-            :key="item.id"
-            :item="item"
-            @refresh="getreply"
-          >
-          </Forum>
-          <div v-if="!reply" style="text-align: center">暂无评论</div>
-          <div></div>
-          <el-pagination
-            background
-            layout="prev, pager, next"
-            :total="pageDate.pageTotal * 10"
-            @current-change="changepage"
-            :hide-on-single-page="true"
-          />
+          <div class="commentform">
+            <el-input
+              v-model="replying"
+              :rows="3"
+              type="textarea"
+              placeholder="一个神评的机会"
+              class="comment_content"
+              resize="none"
+              input-style="font-size: 1.3rem;"
+            />
+            <div
+              style="
+                display: flex;
+                justify-content: space-between;
+                padding-bottom: 6px;
+              "
+            >
+              <!-- 表情 -->
+              <el-dropdown trigger="click">
+                <div class="biaoqing">
+                  <svg
+                    t="1687882510654"
+                    class="icon"
+                    viewBox="0 0 1024 1024"
+                    version="1.1"
+                    xmlns="http://www.w3.org/2000/svg"
+                    p-id="2523"
+                    width="32"
+                    height="32"
+                  >
+                    <path
+                      d="M318.85312 401.08032h102.0928v40.96h-102.0928zM603.05408 401.08032h102.11328v40.96h-102.11328z"
+                      fill=""
+                      p-id="2524"
+                    ></path>
+                    <path
+                      d="M511.97952 867.84c-196.1984 0-355.81952-159.62112-355.81952-355.84S315.78112 156.16 511.97952 156.16c196.21888 0 355.86048 159.62112 355.86048 355.84S708.1984 867.84 511.97952 867.84z m0-670.72C338.35008 197.12 197.12 338.37056 197.12 512s141.23008 314.88 314.85952 314.88c173.64992 0 314.90048-141.23008 314.90048-314.88S685.62944 197.12 511.97952 197.12z"
+                      fill=""
+                      p-id="2525"
+                    ></path>
+                    <path
+                      d="M511.97952 732.63104c-97.11616 0-176.128-78.99136-176.128-176.14848h40.96a135.33184 135.33184 0 0 0 135.168 135.18848 135.3728 135.3728 0 0 0 135.20896-135.18848h40.96c0 97.15712-79.03232 176.14848-176.16896 176.14848z"
+                      fill=""
+                      p-id="2526"
+                    ></path>
+                  </svg>
+                </div>
+                <template #dropdown>
+                  <!-- <el-dropdown-menu> -->
+                  <div class="comment-smile-box b2-show" bis_skin_checked="1">
+                    <button
+                      class="text smily-button"
+                      @click="insertEmoji('😁')"
+                    >
+                      😁</button
+                    ><button
+                      class="text smily-button"
+                      @click="insertEmoji('😊')"
+                    >
+                      😊</button
+                    ><button
+                      class="text smily-button"
+                      @click="insertEmoji('😎')"
+                    >
+                      😎</button
+                    ><button
+                      class="text smily-button"
+                      @click="insertEmoji('😤')"
+                    >
+                      😤</button
+                    ><button
+                      class="text smily-button"
+                      @click="insertEmoji('😥')"
+                    >
+                      😥</button
+                    ><button
+                      class="text smily-button"
+                      @click="insertEmoji('😂')"
+                    >
+                      😂</button
+                    ><button
+                      class="text smily-button"
+                      @click="insertEmoji('😍')"
+                    >
+                      😍</button
+                    ><button
+                      class="text smily-button"
+                      @click="insertEmoji('😏')"
+                    >
+                      😏</button
+                    ><button
+                      class="text smily-button"
+                      @click="insertEmoji('😙')"
+                    >
+                      😙</button
+                    ><button
+                      class="text smily-button"
+                      @click="insertEmoji('😟')"
+                    >
+                      😟</button
+                    ><button
+                      class="text smily-button"
+                      @click="insertEmoji('😖')"
+                    >
+                      😖</button
+                    ><button
+                      class="text smily-button"
+                      @click="insertEmoji('😜')"
+                    >
+                      😜</button
+                    ><button
+                      class="text smily-button"
+                      @click="insertEmoji('😱')"
+                    >
+                      😱</button
+                    ><button
+                      class="text smily-button"
+                      @click="insertEmoji('😲')"
+                    >
+                      😲</button
+                    ><button
+                      class="text smily-button"
+                      @click="insertEmoji('😭')"
+                    >
+                      😭</button
+                    ><button
+                      class="text smily-button"
+                      @click="insertEmoji('😚')"
+                    >
+                      😚</button
+                    ><button
+                      class="text smily-button"
+                      @click="insertEmoji('💀')"
+                    >
+                      💀</button
+                    ><button
+                      class="text smily-button"
+                      @click="insertEmoji('👻')"
+                    >
+                      👻</button
+                    ><button
+                      class="text smily-button"
+                      @click="insertEmoji('👍')"
+                    >
+                      👍</button
+                    ><button
+                      class="text smily-button"
+                      @click="insertEmoji('💪')"
+                    >
+                      💪</button
+                    ><button
+                      class="text smily-button"
+                      @click="insertEmoji('👊')"
+                    >
+                      👊
+                    </button>
+                  </div>
+                  <!-- </el-dropdown-menu> -->
+                </template>
+              </el-dropdown>
+              <!-- 回复 -->
+              <el-button @click="replyfun" type="danger" round>评论</el-button>
+            </div>
+          </div>
         </el-card>
+        <!-- 回复展示区 -->
+        <div class="pinglun">
+          <el-card>
+            <!-- 题目 -->
+            <span>评论</span>
+            <el-divider style="margin-top: 0.75rem" />
+            <!-- 主体内容 -->
+            <Forum
+              class="Forum"
+              v-for="item in reply"
+              :key="item.id"
+              :item="item"
+              @refresh="getreply"
+            >
+            </Forum>
+            <div v-if="!reply" style="text-align: center">暂无评论</div>
+            <div></div>
+            <el-pagination
+              background
+              layout="prev, pager, next"
+              :total="pageDate.pageTotal * 10"
+              @current-change="changepage"
+              :hide-on-single-page="true"
+            />
+          </el-card>
+        </div>
       </div>
     </div>
-  </div>
-  <!-- 回到顶部 -->
-  <div class="totop">
-    <button @click="tolow">去到底部</button>
-    <button @click="totop">回到顶部</button>
-    <button @click="dialogVisible = true" v-if="userid == 2">删除文章</button>
-    <button style="margin-top: 20rem" @click="Addone" @click.left="liking">
-      点赞文章
-    </button>
+    <!-- 回到顶部 -->
+    <div class="tobutton">
+      <div class="totop">
+        <button @click="tolow">去到底部</button>
+        <button @click="totop">回到顶部</button>
+        <button @click="dialogVisible = true" v-if="userid == 2">
+          删除文章
+        </button>
+        <button style="margin-top: 20rem" @click="Addone" @click.left="liking">
+          点赞文章
+        </button>
+      </div>
+    </div>
   </div>
   <el-dialog
     v-model="dialogVisible"
@@ -397,6 +466,12 @@ const insertEmoji = (emoji) => {
 </script>
 
 <style scoped lang="scss">
+.bkg {
+  margin-top: 1vw;
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
 :root {
   --bodywidth: 60%;
 }
@@ -485,14 +560,15 @@ b {
 .Forum:hover .b2timeago-a {
   display: inline;
 }
+.tobutton {
+  position: relative;
+}
 .totop {
-  /* width: 56px; */
-  height: 100%;
-  /* background-color: red; */
-  position: fixed;
-  right: 1vw;
+  position: sticky;
+  top: 80px;
   display: flex;
   flex-direction: column;
+  margin-left: 1rem;
   /* justify-content: space-between; */
 }
 

@@ -86,5 +86,6 @@ canvas {
   height: 100%;
   z-index: 99;
   pointer-events: none;
+  /* background-color: transparent; */
 }
 </style>

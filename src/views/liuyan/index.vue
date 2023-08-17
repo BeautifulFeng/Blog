@@ -1,8 +1,10 @@
 <template>
   <div class="danmu-bg">
     <vue-danmaku
+      ref="danmuqiang"
+      id="danmuqiang"
       v-model:danmus="danmus"
-      style="height: 46rem; width: 100%"
+      style="height: 80%; width: 100%"
       :loop="true"
       :autoplay="true"
       :speed="1000"
@@ -113,10 +115,18 @@ const sendanmu = async () => {
 </script>
 
 <style lang="scss" scoped>
+.bkg {
+  margin-top: 1vw;
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
 .danmu-bg {
+  margin-top: 60px;
   background-color: transparent;
-  // height: rem;
+  height: 100vmin;
   width: 100%;
+  // margin-bottom: -10vmin;
   .send-input {
     display: flex;
     justify-content: center;
@@ -131,7 +141,7 @@ const sendanmu = async () => {
 }
 .reply {
   margin-top: 6rem;
-  height: 1000px;
+  height: 100%;
   width: 100%;
   background: transparent;
   .re-bg {

@@ -4,7 +4,7 @@ import { diffTokenTime } from "../assets/auth";
 // import store from "@/store";
 import { useUserStore } from "../store/user";
 // import { storeToRefs } from "pinia";
-console.log(import.meta);
+// console.log(import.meta);
 const store = useUserStore();
 const service = axios.create({
   // baseURL: "http://114.132.188.196:5177/",

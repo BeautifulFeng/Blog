@@ -1,11 +1,14 @@
 <template>
-  <div>
+  <div style="background-color: black">
     <!-- 背景canvas -->
-    <keep-alive>
+
+    <!-- <keep-alive>
       <BackgroundCanvas></BackgroundCanvas>
-    </keep-alive>
+    </keep-alive> -->
     <!-- 樱花背景 -->
-    <!-- <skuraCanvas></skuraCanvas> -->
+    <keep-alive>
+      <skuraCanvas></skuraCanvas>
+    </keep-alive>
     <!-- 导航 -->
     <div class="blogbar">
       <!-- 吸顶 -->
@@ -20,8 +23,8 @@
           </div>
           <!-- 中间搜索 -->
           <div class="search">
-            <div class="input__container">
-              <div class="shadow__input"></div>
+            <div class="input__container" ref="input__container">
+              <div class="shadow__input" ref="shadow__input"></div>
 
               <input
                 type="text"
@@ -33,6 +36,7 @@
               />
               <button class="input__button__shadow" @click="searchOK">
                 <svg
+                  v-show="searchIconshow"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 20 20"
@@ -43,6 +47,20 @@
                     d="M4 9a5 5 0 1110 0A5 5 0 014 9zm5-7a7 7 0 104.2 12.6.999.999 0 00.093.107l3 3a1 1 0 001.414-1.414l-3-3a.999.999 0 00-.107-.093A7 7 0 009 2z"
                     fill-rule="evenodd"
                     fill="#17202A"
+                  ></path>
+                </svg>
+                <svg
+                  v-show="!searchIconshow"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 20 20"
+                  height="20px"
+                  width="20px"
+                >
+                  <path
+                    d="M4 9a5 5 0 1110 0A5 5 0 014 9zm5-7a7 7 0 104.2 12.6.999.999 0 00.093.107l3 3a1 1 0 001.414-1.414l-3-3a.999.999 0 00-.107-.093A7 7 0 009 2z"
+                    fill-rule="evenodd"
+                    fill="#eeee"
                   ></path>
                 </svg>
               </button>
@@ -105,7 +123,7 @@
               </span>
             </button>
             <!-- 赞助 -->
-            <el-dropdown style="margin-top: -3px">
+            <!-- <el-dropdown style="margin-top: -3px">
               <button class="rightbutton zanzhubutton">
                 <span class="menutext zanzhu"
                   >赞助<svg
@@ -126,7 +144,6 @@
                 ><arrow-down />
                 <span class="menusvg zanzusvg">
                   <el-dropdown trigger="click">
-                    <!-- <button style="padding: 0"> -->
                     <svg
                       t="1685356501087"
                       class="icona"
@@ -143,7 +160,6 @@
                         p-id="1870"
                       ></path>
                     </svg>
-                    <!-- </button> -->
                     <template #dropdown>
                       <img
                         src="/img/微信图片_20230322213949.jpg"
@@ -159,7 +175,7 @@
                   style="width: 15rem"
                 />
               </template>
-            </el-dropdown>
+            </el-dropdown> -->
             <!-- 登录+头像 -->
             <div v-if="AvatarShow" class="touxiang">
               <el-dropdown class="headsvg">
@@ -256,7 +272,12 @@
       </el-affix>
     </div>
     <!-- 主体内容 -->
-    <div class="content" v-show="SessionShow">
+    <div class="headHI">
+      <!-- <keep-alive>
+        <lizi></lizi>
+      </keep-alive> -->
+    </div>
+    <div class="content" v-show="SessionShow" id="article-list">
       <router-view></router-view>
     </div>
   </div>
@@ -334,9 +355,9 @@ import router from "../router";
 import { Reguser, Login } from "../api/user";
 import { useUserStore } from "../store/user";
 import { Base64 } from "js-base64";
-import BackgroundCanvas from "./background.vue";
+// import BackgroundCanvas from "./background.vue";
 import { ElMessage } from "element-plus";
-// import skuraCanvas from "./skura.vue";
+import skuraCanvas from "./skura.vue";
 
 const userStore = useUserStore();
 const Writeshow = ref(false);
@@ -366,11 +387,16 @@ const TurnToDenglu = () => {
 // 菜单栏目
 // 菜单栏 吸附以及绑定scroll事件 监听滚动条
 const menuref = ref(null);
+const searchIconshow = ref(false);
+
 const changeMenu = () => {
   if (document.documentElement.scrollTop > 10) {
+    // console.log(searchIcon.value.getAttribute("fill"));
     menuref.value.style.backgroundColor = "#eeee";
+    searchIconshow.value = true;
   } else {
     menuref.value.style.backgroundColor = "";
+    searchIconshow.value = false;
   }
 };
 // form登录表单
@@ -477,12 +503,6 @@ const searchOK = () => {
   width: 100%;
   height: 3.75rem;
   /* min-width: 900px; */
-  display: flex;
-  justify-content: center;
-}
-
-.content {
-  margin-top: 1vw;
   display: flex;
   justify-content: center;
 }
@@ -678,25 +698,23 @@ button {
 
 .input__container {
   position: relative;
-  background: rgba(255, 255, 255, 0.664);
+  background: rgba(255, 255, 255, 0.1);
+  /* mix-blend-mode: difference; */
   padding: 10px 10px;
   display: flex;
   justify-content: center;
   align-items: center;
 
-  /* gap: 5px; */
   border-radius: 22px;
   width: 200px;
   max-width: 300px;
   transition: transform 400ms;
-  /* transform-style: preserve-3d; */
-  /* transform: rotateX(15deg) rotateY(-20deg); */
   perspective: 500px;
 }
 
 /* Visit https://democoding.in/ for more free css animation */
 
-.shadow__input {
+/* .shadow__input {
   content: "";
   position: absolute;
   width: 100%;
@@ -718,12 +736,11 @@ button {
     radial-gradient(at 90% 65%, hsla(153, 70%, 64%, 1) 0px, transparent 50%),
     radial-gradient(at 91% 83%, hsla(283, 74%, 69%, 1) 0px, transparent 50%),
     radial-gradient(at 72% 91%, hsla(213, 75%, 75%, 1) 0px, transparent 50%);
-}
+} */
 
 .input__button__shadow {
   cursor: pointer;
   border: none;
-  background: none;
   transition: transform 400ms, background 400ms;
   display: flex;
   justify-content: center;
