@@ -1,5 +1,7 @@
-# 我的个人技术博客
+# My personal technology blog.
 
-记录一些小技巧，并逐渐完善见证自身成长。
+Record a few tips, and gradually perfect witness their own growth.
 
-采用 Vue3.2+Node.js 搭建
+采用 Vue3.2+Node.js .
+
+## next project ：' Online chat rooms' from websocket
