@@ -531,14 +531,18 @@ $randomNumber: random(5);
   position: absolute;
   top: 0;
   left: 50%;
+  // margin-bottom: 0;
+  box-sizing: content-box;
   animation: myicon-drowm 1s linear infinite alternate;
 }
 @keyframes myicon-drowm {
   0% {
-    transform: translateY(-8rem);
+    // transform: translateY(-8rem);
+    margin-top: -7%;
   }
   100% {
-    transform: translateY(-6rem);
+    // transform: translateY(-6rem);
+    margin-top: -5%;
     opacity: 0;
   }
 }

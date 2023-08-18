@@ -9,16 +9,6 @@ import { ref, onMounted } from "vue";
 
 const warp = ref(null);
 const imgsUrl = ref([
-  //   "../../public/img/1.jpg",
-  //   "../../public/img/3.jpg",
-  //   "../../public/img/4.jpg",
-  //   "../../public/img/5.jpg",
-  //   "../../public/img/6.jpg",
-  // "../../../../public/img/00021.png",
-  // "../../../../public/img/00023.png",
-  // "../../../../public/img/00024.png",
-  // "../../../../public/img/00025.png",
-  // "../../../../public/img/00026.png",
   "/img/00021.png",
   "/img/00023.png",
   "/img/00024.png",
@@ -107,7 +97,9 @@ class Particale {
       this.warp.width,
       this.warp.height
     );
+
     let data = imageData.data;
+    console.log(data);
     for (let x = 0; x < imageData.width; x += this.radius * 2) {
       for (let y = 0; y < imageData.height; y += this.radius * 2) {
         let i = (x + y * this.warp.width) * 4;
