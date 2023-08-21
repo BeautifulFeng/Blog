@@ -17,4 +17,7 @@
   position: relative !important;
   top: -120px !important ; /* 调整这一行的值以改变 ElMessage 的位置 */
 }
+#plauer {
+  margin: 1rem !important;
+}
 </style>

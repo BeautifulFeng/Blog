@@ -1,6 +1,10 @@
 <template>
   <!-- <canvas ref="warp" width="1600" height="680"></canvas> -->
+  <!-- <div class="bkg"> -->
+  <!-- <canvas ref="warp" width="1920" height="1080"></canvas> -->
   <canvas ref="warp" width="1080" height="480"></canvas>
+  <!-- <canvas ref="warp" width="1440" height="640"></canvas> -->
+  <!-- </div> -->
   <!-- <canvas ref="warp" width="1440" height="640"></canvas> -->
 </template>
 
@@ -14,6 +18,13 @@ const imgsUrl = ref([
   "/img/00024.png",
   "/img/00025.png",
   "/img/00026.png",
+  // "/img/1.jpg",
+  // "/img/2.jpg",
+  // "/img/3.jpg",
+  // "/img/00023.png",
+  // "/img/00024.png",
+  // "/img/00025.png",
+  // "/img/00026.png",
 ]);
 const radius = ref(1);
 
@@ -99,7 +110,7 @@ class Particale {
     );
 
     let data = imageData.data;
-    console.log(data);
+    // console.log(data);
     for (let x = 0; x < imageData.width; x += this.radius * 2) {
       for (let y = 0; y < imageData.height; y += this.radius * 2) {
         let i = (x + y * this.warp.width) * 4;
@@ -250,9 +261,18 @@ onMounted(() => {
 
 <style scoped>
 canvas {
-  /* background-color: aliceblue; */
+  /* background-color: rgba(85, 55, 169); */
+  /* margin-left: auto; */
   width: 100%;
   z-index: 0;
   pointer-events: none;
+  text-align: center;
 }
+/* .bkg {
+  margin: 0 auto;
+  overflow: hidden;
+  z-index: 0;
+  pointer-events: none;
+  text-align: center;
+} */
 </style>

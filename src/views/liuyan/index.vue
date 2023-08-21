@@ -1,5 +1,5 @@
 <template>
-  <div class="danmu-bg">
+  <div class="danmu-bg" ref="bkg">
     <vue-danmaku
       ref="danmuqiang"
       id="danmuqiang"
@@ -7,12 +7,12 @@
       style="height: 80%; width: 100%"
       :loop="true"
       :autoplay="true"
-      :speed="1000"
-      :font-size="26"
-      :debounce="400"
       :randomChannel="true"
+      :speeds="200"
+      :fontSize="26"
+      :debounce="100"
       :isSuspend="true"
-      :extraStyle="`color: #ffff`"
+      :extraStyle="`color: black`"
     >
     </vue-danmaku>
     <!-- <el-alert title="发送成功" type="success" show-icon center /> -->
@@ -35,7 +35,7 @@
 <script setup>
 // import ref from "vue";
 import vueDanmaku from "vue3-danmaku";
-import { ref, reactive } from "vue";
+import { ref, reactive, onMounted } from "vue";
 import { SenDanmu, GetDanmu } from "../../api/message";
 const danmus = ref([]);
 const danmutext = ref("");
@@ -112,6 +112,12 @@ const sendanmu = async () => {
     });
   }
 };
+const bkg = ref(null);
+// onMounted(() => {
+//   const height = window.innerHeight - 120;
+//   console.log(height);
+//   bkg.value.style.height = `${height}px`;
+// });
 </script>
 
 <style lang="scss" scoped>
@@ -124,9 +130,9 @@ const sendanmu = async () => {
 .danmu-bg {
   margin-top: 60px;
   background-color: transparent;
-  height: 100vmin;
+  height: calc(100vh - 120px);
   width: 100%;
-  // margin-bottom: -10vmin;
+  // margin-bottom: 60px;
   .send-input {
     display: flex;
     justify-content: center;
@@ -147,6 +153,18 @@ const sendanmu = async () => {
   .re-bg {
     height: 600px;
     width: 300px;
+  }
+}
+@media screen and (max-width: 530px) {
+  .danmu-bg {
+    margin-top: 0;
+    height: 100vh;
+
+    .send-input {
+      .w-50 {
+        width: 30%;
+      }
+    }
   }
 }
 </style>

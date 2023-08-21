@@ -1,4 +1,24 @@
 <style scoped lang="scss">
+.content-text {
+  max-width: 600px;
+  word-wrap: break-word;
+}
+@media screen and (max-width: 1400px) {
+  .content-text {
+    max-width: 300px;
+  }
+}
+@media screen and (max-width: 900px) {
+  .content-text {
+    max-width: 200px;
+  }
+}
+@media screen and (max-width: 768px) {
+  .content-text {
+    max-width: 148px;
+  }
+}
+
 .Forum {
   border-bottom: 0.0625rem solid #efefef;
   margin-top: 1rem;
@@ -226,7 +246,7 @@
         </div>
         <!-- 回复的内容 -->
         <div class="Forum-content-text">
-          <p>{{ item.text }}</p>
+          <p class="content-text">{{ item.text }}</p>
         </div>
         <!-- 回复的时间与点赞 -->
         <div class="Forum-content-other">

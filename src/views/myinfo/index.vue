@@ -1,5 +1,5 @@
 <template>
-  <div class="bkg">
+  <div class="bkg" ref="bkg">
     <div class="home">
       <div>
         <el-card>
@@ -28,6 +28,7 @@
       v-model="centerDialogVisible"
       title="更换头像"
       width="30%"
+      style="min-width: 360px"
       :before-close="handleClose"
     >
       <div style="display: flex">
@@ -70,7 +71,7 @@
 </template>
 
 <script setup>
-import { ref, reactive } from "vue";
+import { ref, reactive, onMounted } from "vue";
 import { useUserStore } from "../../store/user";
 import { ElMessage } from "element-plus";
 import { updateavatar, updInfo } from "../../api/user";
@@ -82,6 +83,14 @@ const centerDialogVisible = ref(false);
 const headers = ref({
   Authorization: localStorage.getItem("token"),
 });
+window.scrollTo(0, 0);
+// const bkg = ref(null);
+// onMounted(() => {
+//   const hight = window.innerHeight;
+//   console.log(hight);
+//   console.log(bkg.value);
+//   bkg.value.style.height = `${hight - 60}px`;
+// });
 // 用户信息
 const form = reactive({
   nickname: userstore.nickname,
@@ -130,28 +139,29 @@ const updPassword = () => {
 };
 // 确定保存
 const updateInfo = async () => {
-  // if (!form.password){
-  //   delete form.password
-  //   console.log(form);
-  // }
-  // else{console.log(form);}
-  delete form.url;
-  const res = await updInfo(form);
-  console.log(res);
-  if (res.status === 200) {
-    userstore.updNickname(form.nickname);
-    ElMessage.success("更换成功");
+  if (form.nickname === userstore.nickname) {
+    return ElMessage.warning("昵称未修改");
   }
+  const res = await updInfo(form);
+  if (res.status === 200) {
+    return userstore.updNickname(form.nickname), ElMessage.success("更换成功");
+  }
+  ElMessage.error("更换失败,用户名已存在");
 };
 </script>
 
 <style scoped>
 .bkg {
-  margin-top: 1vw;
+  /* margin-top: 1vw; */
   display: flex;
-  height: 100vh;
+  height: calc(100vh - 60px - 1vw);
+  /* height: 100%; */
   justify-content: center;
   position: relative;
+}
+.home {
+  margin: 6rem auto;
+  height: 0;
 }
 .avatar-uploader .el-upload {
   border: 1px dashed #d9d9d9;

@@ -265,30 +265,47 @@ const tolow = () => {
     document.documentElement.scrollHeight || document.body.scrollHeight;
   let clientHeight =
     document.documentElement.clientHeight || document.body.clientHeight;
+  console.log(clientHeight);
   let step = Math.floor((scrollHeight - scrollTop) / 20); // 计算每次滚动的距离
-  let timer = setInterval(function () {
-    scrollTop += step;
-    if (scrollTop + clientHeight >= scrollHeight) {
-      clearInterval(timer);
-      window.scrollTo(0, scrollHeight);
-    } else {
-      window.scrollTo(0, scrollTop);
-    }
-  }, 10); // 每10毫秒执行一次滚动
+
+  // const scroll = () => {
+  //   scrollTop += step;
+  //   if (scrollTop + clientHeight >= scrollHeight) {
+  //     window.scrollTo(0, scrollHeight);
+  //   } else {
+  //     window.scrollTo(0, scrollTop);
+  //     requestAnimationFrame(scroll);
+  //   }
+  // };
+
+  // requestAnimationFrame(scroll);
+  window.scrollTo({
+    top: scrollHeight - scrollTop,
+    behavior: "smooth",
+  });
 };
+
 // 回顶部
 const totop = () => {
-  let scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
-  let step = Math.floor(scrollTop / 20);
-  let timer = setInterval(function () {
-    scrollTop -= step;
-    if (scrollTop <= 0) {
-      clearInterval(timer);
-      window.scrollTo(0, 0);
-    } else {
-      window.scrollTo(0, scrollTop);
-    }
-  }, 10);
+  // let scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+  // let step = Math.floor(scrollTop / 20);
+  // console.log(scrollTop);
+
+  // const scroll = () => {
+  //   scrollTop -= step;
+  //   if (scrollTop <= 0) {
+  //     window.scrollTo(0, 0);
+  //   } else {
+  //     window.scrollTo(0, scrollTop);
+  //     requestAnimationFrame(scroll);
+  //   }
+  // };
+
+  // requestAnimationFrame(scroll);
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth",
+  });
 };
 // 点赞事件的特效
 const Addone = (e) => {
@@ -419,6 +436,14 @@ const goBack = () => {
 //评论区输入的内容
 const replying = ref("");
 const replyfun = () => {
+  if (!replying.value) {
+    ElMessage({
+      message: "评论内容不能为空",
+      type: "err",
+      offset: 300,
+    });
+    return;
+  }
   // console.log(replying.value);
   const id = userStore.id;
   // console.log(id);
@@ -431,6 +456,15 @@ const replyfun = () => {
       type: "error",
     });
   } else {
+    if (replying.value.length >= 100) {
+      ElMessage({
+        showClose: true,
+        message: "太长了，不得超过100字符.",
+        type: "error",
+        offset: 300,
+      });
+      return;
+    }
     // 发送回复评论
     const addreplying = async () => {
       const res = await addReplying({
@@ -471,6 +505,7 @@ const insertEmoji = (emoji) => {
   display: flex;
   justify-content: center;
   position: relative;
+  min-height: calc(100vh - 1vw);
 }
 :root {
   --bodywidth: 60%;
@@ -491,6 +526,8 @@ b {
   max-width: 55vw;
   background-color: #eeeeeef6;
   border-radius: 1rem;
+  box-shadow: 18px 18px 30px rgba(0, 0, 0, 0.2),
+    -18px -18px 30px rgba(255, 255, 255, 1);
   /* min-width: 600px; */
   /* z-index: 99; */
 }
@@ -579,11 +616,21 @@ b {
   font-size: 0.75rem;
   margin-top: 0.5rem;
   text-align: center;
+  box-shadow: 18px 18px 30px rgba(0, 0, 0, 0.2),
+    -5px -5px 30px rgba(255, 255, 255, 1);
+  transition: all 0.2s ease-out;
 }
 
 .totop > button:hover {
-  background-color: #f3f2f2;
+  transform: scale(0.9);
+  box-shadow: 0 0 0 rgba(0, 0, 0, 0.2), 0 0 0 rgba(255, 255, 255, 0.8),
+    inset 18px 18px 30px rgba(0, 0, 0, 0.1),
+    inset -18px -18px 30px rgba(255, 255, 255, 1);
 }
+
+// :hover {
+//   background-color: #f3f2f2;
+// }
 .Forum-content-repling {
   display: flex;
   position: relative;
@@ -658,12 +705,18 @@ b {
 }
 
 @media screen and (max-width: 530px) {
+  .bkg {
+    height: initial;
+  }
   .home {
     max-width: 400px;
   }
 
   .contentbody {
     min-width: 400px;
+  }
+  .pinglun {
+    margin-bottom: 60px;
   }
 }
 @keyframes Addone {

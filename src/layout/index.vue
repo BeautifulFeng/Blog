@@ -1,14 +1,15 @@
 <template>
-  <div style="background-color: black">
+  <div style="background-color: #f4efed">
+    <!-- <div style="background-color: rgb(247, 243, 243, 0.6)"> -->
     <!-- 背景canvas -->
 
     <!-- <keep-alive>
       <BackgroundCanvas></BackgroundCanvas>
     </keep-alive> -->
     <!-- 樱花背景 -->
-    <keep-alive>
+    <!-- <keep-alive>
       <skuraCanvas></skuraCanvas>
-    </keep-alive>
+    </keep-alive> -->
     <!-- 导航 -->
     <div class="blogbar">
       <!-- 吸顶 -->
@@ -36,7 +37,6 @@
               />
               <button class="input__button__shadow" @click="searchOK">
                 <svg
-                  v-show="searchIconshow"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 20 20"
@@ -49,27 +49,17 @@
                     fill="#17202A"
                   ></path>
                 </svg>
-                <svg
-                  v-show="!searchIconshow"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 20 20"
-                  height="20px"
-                  width="20px"
-                >
-                  <path
-                    d="M4 9a5 5 0 1110 0A5 5 0 014 9zm5-7a7 7 0 104.2 12.6.999.999 0 00.093.107l3 3a1 1 0 001.414-1.414l-3-3a.999.999 0 00-.107-.093A7 7 0 009 2z"
-                    fill-rule="evenodd"
-                    fill="#eeee"
-                  ></path>
-                </svg>
               </button>
             </div>
           </div>
           <!-- 右侧东西 -->
           <div class="text">
             <!-- 首页 -->
-            <button @click="router.push('/home')" class="rightbutton">
+            <button
+              @click="router.push('/home')"
+              class="rightbutton shouyeButton"
+              ref="shouye"
+            >
               <span class="menutext">首页</span>
               <span class="menusvg"
                 ><svg
@@ -91,7 +81,11 @@
               </span>
             </button>
             <!-- 留言板 -->
-            <button class="rightbutton" @click="router.push('/liuyan')">
+            <button
+              class="rightbutton liuyanButton"
+              @click="router.push('/liuyan')"
+              ref="liuyan"
+            >
               <span class="menutext">留言板</span>
               <span class="menusvg"
                 ><svg
@@ -234,7 +228,7 @@
               </el-dropdown>
             </div>
             <div v-else>
-              <button class="denglubutton" @click="TurnToDenglu">
+              <button class="denglubutton rightbutton" @click="TurnToDenglu">
                 <span class="menutext">登录</span>
                 <span class="menusvg denglusvg">
                   <svg
@@ -244,8 +238,8 @@
                     version="1.1"
                     xmlns="http://www.w3.org/2000/svg"
                     p-id="3139"
-                    width="32"
-                    height="32"
+                    width="30"
+                    height="30"
                   >
                     <path
                       d="M512 590.75c-142.5 0-258.75-116.25-258.75-258.75s116.25-262.5 258.75-262.5 258.75 116.25 258.75 258.75-116.25 262.5-258.75 262.5zM512 144.5c-101.25 0-183.75 82.5-183.75 183.75s82.5 183.75 183.75 183.75 183.75-82.5 183.75-183.75-82.5-183.75-183.75-183.75z"
@@ -284,7 +278,8 @@
   <el-dialog
     v-model="DengluShow"
     :before-close="handleClose"
-    style="max-width: 400px"
+    width="40%"
+    style="min-width: 360px"
   >
     <div>
       <el-tabs
@@ -357,7 +352,7 @@ import { useUserStore } from "../store/user";
 import { Base64 } from "js-base64";
 // import BackgroundCanvas from "./background.vue";
 import { ElMessage } from "element-plus";
-import skuraCanvas from "./skura.vue";
+// import skuraCanvas from "./skura.vue";
 
 const userStore = useUserStore();
 const Writeshow = ref(false);
@@ -387,17 +382,19 @@ const TurnToDenglu = () => {
 // 菜单栏目
 // 菜单栏 吸附以及绑定scroll事件 监听滚动条
 const menuref = ref(null);
-const searchIconshow = ref(false);
 
 const changeMenu = () => {
-  if (document.documentElement.scrollTop > 10) {
-    // console.log(searchIcon.value.getAttribute("fill"));
-    menuref.value.style.backgroundColor = "#eeee";
-    searchIconshow.value = true;
-  } else {
-    menuref.value.style.backgroundColor = "";
-    searchIconshow.value = false;
-  }
+  // if (document.documentElement.scrollTop > 10) {
+  //   // console.log(searchIcon.value.getAttribute("fill"));
+  //   // menuref.value.style.backgroundColor = "#F0F0F0";
+  //   menuref.value.style.backgroundColor = "rgba(251, 251, 253, .8)";
+  //   menuref.value.style.backdropFilter = "saturate(180%) blur(20px)";
+  //   // console.log(menuref.value.style);
+  //   //     --globalnav-backdrop-filter: saturate(180%) blur(20px);
+  //   // --globalnav-background: rgba(251, 251, 253, .8);
+  // } else {
+  //   menuref.value.style.backgroundColor = "rgba(251, 251, 253, .8)";
+  // }
 };
 // form登录表单
 const ruleFormRef = ref();
@@ -505,6 +502,8 @@ const searchOK = () => {
   /* min-width: 900px; */
   display: flex;
   justify-content: center;
+  background-color: rgba(251, 251, 253, 0.8);
+  backdrop-filter: saturate(180%) blur(20px);
 }
 
 .zanzhu {
@@ -576,19 +575,19 @@ const searchOK = () => {
 .touxiang {
   margin-left: 1rem;
 }
-.denglubutton {
+/* .denglubutton {
   position: relative;
   font-size: inherit;
   font-family: inherit;
   padding: 0.5em 1em;
   outline: none;
   border: none;
-}
+} */
 
-.denglubutton:hover {
+/* .denglubutton:hover {
   cursor: pointer;
   animation: jelly 0.5s;
-}
+} */
 
 @keyframes jelly {
   0%,
@@ -617,12 +616,12 @@ const searchOK = () => {
   mix-blend-mode: difference;
 }
 
-.denglubutton:hover::before {
+/* .denglubutton:hover::before {
   transition: all 0.75s ease-in-out;
   transform-origin: center;
   transform: scale(1.75);
   opacity: 0;
-}
+} */
 
 .logo > span {
   color: #eeee;
@@ -648,6 +647,12 @@ button {
   position: relative;
   border: none;
 }
+/* .shouyeButton { */
+/* box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2), 0 0 0 rgba(255, 255, 255, 0.8),
+    inset 18px 18px 30px rgba(0, 0, 0, 0.1),
+    inset -18px -18px 30px rgba(255, 255, 255, 1); */
+/* transform: scale(0.95); */
+/* } */
 
 /* butto动画 */
 .rightbutton::before,
@@ -805,41 +810,35 @@ button {
 }
 
 @media screen and (max-width: 530px) {
-  .input__search {
+  .blogbar {
+    position: fixed;
+    z-index: 999;
+    bottom: 0;
+    width: 100%;
+  }
+  /* .touxiang {
+    margin: 0 0 0.4rem 1rem;
+  } */
+  .logo {
     display: none;
   }
-
   .input__container {
-    width: 50px;
+    width: min-content;
+  }
+  .input__search {
+    width: 100px;
+  }
+  .denglusvg {
+    margin-left: 0;
   }
   .menu {
     justify-content: unset;
   }
-
-  .logo {
-    margin: 0;
-  }
-
   .text {
     margin: 0;
   }
-
-  .input__container {
-    width: 10px;
-    padding: 1px 10px;
-    /* margin-top: 10px; */
-  }
-
-  .search {
-    margin: 1rem 0.5rem;
-  }
-
   .menutext {
     display: none;
-  }
-
-  .rightbutton {
-    padding: 1rem !important;
   }
 
   .menusvg {
@@ -849,16 +848,11 @@ button {
   .headsvg-phone {
     display: block;
   }
-
   .zanzhu {
     display: none;
   }
-
   .headsvg {
     display: none;
   }
-}
-
-@media screen and (max-width: 418px) {
 }
 </style>

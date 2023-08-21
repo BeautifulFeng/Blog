@@ -18,14 +18,14 @@
         >
           <path
             d="M533.7 544.7l1.8-1.8 21.8-21.8L733 345.4c12.5-12.4 12.5-32.8 0.1-45.2-12.5-12.4-32.9-12.4-45.3 0L512 475.9 336.3 300.1c-12.5-12.4-32.9-12.4-45.3 0-12.4 12.5-12.4 32.9 0 45.3l175.7 175.7 21.5 21.5 2.2 2.2c5.7 5.2 13.2 8.3 21.5 8.3 8.4 0.1 16.1-3.1 21.8-8.4z"
-            fill="#ffffff"
+            fill="#402a2e"
             p-id="6140"
             data-spm-anchor-id="a313x.search_index.0.i16.601c3a81oHGWka"
             class=""
           ></path>
           <path
             d="M533.7 724.8l1.8-1.8 21.8-21.8L733 525.5c12.5-12.4 12.5-32.8 0.1-45.2-12.5-12.4-32.9-12.4-45.3 0L512 656 336.3 480.2c-12.5-12.4-32.9-12.4-45.3 0-12.4 12.5-12.4 32.9 0 45.3l175.7 175.7 21.5 21.5 2.2 2.2c5.7 5.2 13.2 8.3 21.5 8.3 8.4 0.1 16.1-3.1 21.8-8.4z"
-            fill="#ffffff"
+            fill="#402a2e"
             p-id="6141"
             data-spm-anchor-id="a313x.search_index.0.i18.601c3a81oHGWka"
             class=""
@@ -169,6 +169,84 @@
                 <p>{{ item.likenum }}</p>
               </span>
             </div>
+            <div class="phonexiangqing">
+              <span
+                ><svg
+                  t="1687371783145"
+                  class="icon"
+                  viewBox="0 0 1024 1024"
+                  version="1.1"
+                  xmlns="http://www.w3.org/2000/svg"
+                  p-id="3265"
+                  width="12"
+                  height="12"
+                >
+                  <path
+                    d="M768 298.666667c0 141.386667-114.613333 256-256 256S256 440.053333 256 298.666667 370.613333 42.666667 512 42.666667s256 114.613333 256 256z m108.18 446.486666A211.94 211.94 0 0 0 725.333333 682.666667H298.666667a213.333333 213.333333 0 0 0-213.333334 213.333333v32a53.393333 53.393333 0 0 0 53.333334 53.333333h746.666666a53.393333 53.393333 0 0 0 53.333334-53.333333v-32a211.94 211.94 0 0 0-62.486667-150.846667z"
+                    fill="#5C5C66"
+                    p-id="3266"
+                  ></path>
+                </svg>
+                <div style="color: #e76e16">
+                  {{ item.nickname }}
+                </div></span
+              >
+              <span>
+                <svg
+                  t="1687373492839"
+                  class="icon"
+                  viewBox="0 0 1024 1024"
+                  version="1.1"
+                  xmlns="http://www.w3.org/2000/svg"
+                  p-id="6121"
+                  width="12"
+                  height="12"
+                >
+                  <path
+                    d="M512 619.38c29.23 0 59.78-45.83 59.78-107.6s-30.56-107.6-59.78-107.6c-29.22 0-59.78 45.83-59.78 107.6s30.55 107.6 59.78 107.6z m0 71.72c-76.42 0-131.5-82.63-131.5-179.33S435.58 332.45 512 332.45s131.5 82.63 131.5 179.33S588.42 691.1 512 691.1z m0 71.74c169.63 0 346.7-150.95 346.7-251.06S681.63 260.72 512 260.72c-164.37 0-346.7 160.27-346.7 251.06S347.63 762.84 512 762.84z m0 71.73c-202.08 0-418.44-190.18-418.44-322.79S309.92 188.99 512 188.99c206.94 0 418.44 180.3 418.44 322.79S718.94 834.57 512 834.57z"
+                    fill="#262626"
+                    p-id="6122"
+                  ></path>
+                </svg>
+                <div>
+                  {{ item.looknum > 999 ? "999+" : item.looknum }}
+                </div>
+              </span>
+              <span>
+                <svg
+                  t="1687373512057"
+                  class="icon"
+                  viewBox="0 0 1024 1024"
+                  version="1.1"
+                  xmlns="http://www.w3.org/2000/svg"
+                  p-id="7122"
+                  width="12"
+                  height="12"
+                >
+                  <path
+                    d="M939.358251 423.424662c-23.01825-37.252439-62.924121-60.779272-107.019409-63.209624-2.755764-0.38681-5.510504-0.579191-8.347109-0.579191l-152.202471-0.121773c6.649444-28.975938 10.015098-58.653865 10.015098-88.657202 0-28.223808-3.213181-57.139372-9.556657-85.952604-0.447185-2.043542-1.098008-4.006244-1.932002-5.866614-15.820314-57.302077-67.37755-96.841605-127.282918-96.841605-72.827679 0-132.081201 59.254545-132.081201 132.081201 0 3.334955 0.132006 6.66991 0.406253 10.015098-2.196015 57.211003-32.108279 109.947088-80.269162 141.363611-14.447037 9.42465-18.524912 28.773324-9.099239 43.220361 9.414417 14.437827 28.752858 18.535145 43.220361 9.099239 65.811892-42.925648 106.429984-115.325585 108.656699-193.684234 0.030699-1.332345-0.010233-2.663666-0.14224-3.996011-0.203638-2.012843-0.304945-4.016477-0.304945-6.019087 0-38.381146 31.233352-69.614497 69.614497-69.614497 32.57593 0 60.474326 22.204721 67.824735 53.997821 0.356111 1.534959 0.823761 3.019777 1.402953 4.453429 4.696975 22.814612 7.076162 45.579081 7.076162 67.743894 0 37.485753-6.222725 74.352405-18.494213 109.592001-3.324722 9.546424-1.819438 20.111037 4.02671 28.345582 5.856381 8.245801 15.332197 13.146415 25.448602 13.156648l193.226816 0.101307c1.423419 0.264013 2.857071 0.426719 4.300956 0.477884 24.116257 0.9967 45.935192 13.614066 58.603723 34.090423 7.838525 12.31242 11.438517 26.800389 10.431583 41.939181-0.080841 0.945535-0.121773 1.911536-0.11154 2.877537 0 0.854461 0.040932 1.697665 0.11154 2.53166 0.010233 0.335644-0.030699 0.661056-0.11154 0.976234-0.101307 0.376577-0.193405 0.772596-0.284479 1.159406l-74.972529 330.391802c-0.914836 1.281179-1.738597 2.6432-2.449795 4.046153-5.937223 11.762905-14.660908 21.48329-25.346271 28.172643-10.746762 6.812149-23.059182 10.614755-35.757388 11.06194-0.854461-0.061398-513.766226-0.224104-513.766226-0.224104-0.467651-0.020466-0.935302-0.030699-1.402953-0.030699 0 0-111.01542 0.172939-112.718201 0.457418-1.932002 0-3.446495-1.50426-3.446495-3.415796l0.299829-416.334173c0-1.901303 1.545192-3.446495 3.01466-3.456728l1.245364 0.121773c1.174756 0.132006 2.653433 0.284479 3.52836 0.193405l83.82822-0.222057 0 339.367221c0 17.253966 13.979386 31.233352 31.233352 31.233352s31.233352-13.979386 31.233352-31.233352L281.009092 435.350273c0-1.778506 0-8.631588 0-10.411117 0-17.253966-13.979386-30.928407-31.233352-30.928407-1.50426 0-117.547183 0.304945-119.402437 0.304945-36.34272 0-65.913199 29.566386-65.913199 65.893756l-0.299829 416.334173c0 36.337603 29.571503 65.902966 65.913199 65.902966 2.541893 0 111.406323-0.457418 111.406323-0.457418 0.457418 0.020466 0.925069 0.030699 1.382487 0.030699 0 0 511.458671 0.274246 512.505513 0.274246 25.469068 0 50.296523-7.197936 71.647807-20.73116 19.612687-12.281721 35.777855-29.881564 46.839795-50.967812 3.660366-5.622044 6.435573-11.875468 8.256034-18.615986 0.11154-0.416486 0.213871-0.823761 0.304945-1.240247l74.881454-330.340637c1.596358-6.212492 2.257413-12.586666 2.00261-18.992563C960.892707 473.366098 953.948551 446.331371 939.358251 423.424662z"
+                    fill="#999999"
+                    p-id="7123"
+                  ></path>
+                  <path
+                    d="M450.027553 518.650467c-17.253966 0-31.233352 13.979386-31.233352 31.233352l0 30.470989c0 17.253966 13.979386 31.233352 31.233352 31.233352 17.253966 0 31.233352-13.979386 31.233352-31.233352l0-30.470989C481.260905 532.629853 467.281519 518.650467 450.027553 518.650467z"
+                    fill="#999999"
+                    p-id="7124"
+                  ></path>
+                  <path
+                    d="M693.805696 518.650467c-17.253966 0-31.233352 13.979386-31.233352 31.233352l0 30.470989c0 17.253966 13.979386 31.233352 31.233352 31.233352 17.253966 0 31.233352-13.979386 31.233352-31.233352l0-30.470989C725.039048 532.629853 711.058638 518.650467 693.805696 518.650467z"
+                    fill="#999999"
+                    p-id="7125"
+                  ></path>
+                  <path
+                    d="M648.940882 660.09492c-14.304797-9.393951-33.592073-5.398964-43.159986 8.763594-0.132006 0.193405-13.614066 19.754926-34.171264 19.754926-19.98824 0-32.423457-18.09717-33.266661-19.368116-9.17087-14.427594-28.254507-18.809391-42.834574-9.770528-14.650675 9.109472-19.155269 28.366048-10.055007 43.016723 11.214413 18.047028 41.96988 48.588625 86.156242 48.588625 43.962258 0 75.104535-30.318516 86.572728-48.222281C667.404396 688.461991 663.216004 669.500127 648.940882 660.09492z"
+                    fill="#999999"
+                    p-id="7126"
+                  ></path>
+                </svg>
+                <div>{{ item.likenum }}</div>
+              </span>
+            </div>
           </div>
           <div class="right">
             <img
@@ -182,13 +260,16 @@
             />
           </div>
         </div>
-        <p v-if="noMore" style="text-align: center">没有更多了...</p>
-        <div class="balls" v-if="loading">
-          <div></div>
-          <div></div>
-          <div></div>
+        <div class="showload">
+          <p v-if="noMore" style="text-align: center">没有更多了...</p>
+          <div class="balls" v-if="loading">
+            <div></div>
+            <div></div>
+            <div></div>
+          </div>
         </div>
       </div>
+
       <!-- 加载动画或提示 -->
       <!-- <div v-if="loading">Loading...</div> -->
       <div class="rightFather">
@@ -250,6 +331,14 @@
         </div>
       </div>
     </div>
+    <div class="showPhoneload">
+      <p v-if="noMore" style="text-align: center">没有更多了...</p>
+      <div class="balls" v-if="loading">
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -278,6 +367,7 @@ const getcates = async () => {
   res.data.forEach((item) => {
     articleList.value.push(item);
   });
+  console.log(articleList.value);
   pageDate.total = res.total;
   // pageDate.pageNum = pageDate.pageNum + 1
   pageDate.pageNum += 1;
@@ -305,9 +395,10 @@ getcates();
 // 懒加载
 const load = () => {
   console.log(1);
-  if (pageDate.pageNum == 1) {
-    getcates();
-  } else if (pageDate.pageNum < pageDate.total + 1) {
+  // if (pageDate.pageNum == 1) {
+  //   getcates();
+  // } else
+  if (pageDate.pageNum < pageDate.total + 1) {
     loading.value = true;
     setTimeout(() => {
       getcates();
@@ -317,17 +408,37 @@ const load = () => {
   }
 };
 const Totop = () => {
-  let scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
-  let step = Math.floor(scrollTop / 20);
-  let timer = setInterval(function () {
-    scrollTop -= step;
-    if (scrollTop <= 0) {
-      clearInterval(timer);
-      window.scrollTo(0, 0);
-    } else {
-      window.scrollTo(0, scrollTop);
-    }
-  }, 10);
+  // let scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+  // let step = Math.floor(scrollTop / 20);
+  // let timer = setInterval(function () {
+  //   scrollTop -= step;
+  //   if (scrollTop <= 0) {
+  //     clearInterval(timer);
+  //     window.scrollTo(0, 0);
+  //   } else {
+  //     window.scrollTo(0, scrollTop);
+  //   }
+  // }, 10);
+  // const scrollToTop = () => {
+  //   let scrollTop =
+  //     document.documentElement.scrollTop || document.body.scrollTop;
+  //   let step = Math.floor(scrollTop / 10);
+
+  //   scrollTop -= step;
+  //   if (scrollTop <= 10) {
+  //     window.scrollTo(0, 10);
+  //   } else {
+  //     window.scrollTo(0, scrollTop);
+  //     console.log(scrollTop);
+  //     requestAnimationFrame(scrollToTop);
+  //   }
+  // };
+
+  // requestAnimationFrame(scrollToTop);
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth",
+  });
 };
 // 下滑到文章列表
 const Lookartcal = () => {
@@ -350,23 +461,40 @@ $randomNumber: random(5);
   display: flex;
   justify-content: center;
   position: relative;
+  // flex-direction: column;
 }
 
 .home {
   /* height: 100%; */
   width: 800px;
+  // box-shadow: 18px 18px 30px rgba(0, 0, 0, 0.2),
+  //   -18px -18px 30px rgba(255, 255, 255, 1);
+  // transition: all 0.2s ease-out;
 }
+
 .card {
+  margin-bottom: 1rem;
   height: 13vh;
   border-radius: 10px;
 
-  box-shadow: 10px 10px rgba(167, 167, 167, 0.952);
+  box-shadow: 18px 18px 30px rgba(0, 0, 0, 0.2),
+    -15px -15px 20px rgba(255, 255, 255, 1);
+
   position: relative;
-  border-top: 0.1rem solid rgb(51, 50, 50);
+  // border-top: 0.1rem solid rgb(51, 50, 50);
+
   background-color: #eeeeeef6;
-  box-shadow: 0px 0px 10px rgba(62, 74, 238, 0.952);
+  transition: all 0.2s ease-out;
+  // box-shadow: 0px 0px 10px rgba(62, 74, 238, 0.952);
   // box-shadow:X轴偏移量 Y轴偏移量 阴影模糊半径 阴影扩展半径 阴影颜色 投影方式
-  animation: shadow1 $randomNumber + s ease-in-out infinite;
+  // animation: shadow1 $randomNumber + s ease-in-out infinite;
+}
+.card:hover {
+  transform: scale(0.95);
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.2), 0 0 0 rgba(255, 255, 255, 0.8),
+    inset 18px 18px 30px rgba(0, 0, 0, 0.1),
+    // inset -5px -5px 10px rgb(0, 0, 0, 0.01);
+    inset -18px -18px 30px rgba(255, 255, 255, 1);
 }
 
 @keyframes shadow1 {
@@ -414,11 +542,12 @@ $randomNumber: random(5);
   position: absolute;
   right: 2%;
   top: 15%;
+  transition: all 1.2 ease-out;
 }
 .text {
   height: 3.5rem;
   text-align: left;
-  line-height: 2rem;
+  line-height: 4rem;
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
@@ -447,7 +576,14 @@ $randomNumber: random(5);
 }
 .upmsg {
   margin-left: 1rem;
+  box-shadow: 18px 18px 30px rgba(0, 0, 0, 0.2);
+  transition: all 0.2s ease-out;
+  border-radius: 10%;
 }
+.phonexiangqing {
+  display: none;
+}
+
 @media screen and (max-width: 939px) {
   .left {
     width: 80%;
@@ -466,7 +602,7 @@ $randomNumber: random(5);
     // overflow: hidden; /* 隐藏溢出部分 */
     // text-overflow: ellipsis; /* 使用省略号表示溢出部分 */
     overflow: hidden;
-    font-size: x-large;
+    // font-size: x-large;
   }
 }
 .balls {
@@ -517,9 +653,18 @@ $randomNumber: random(5);
   height: 32px;
   background: rgba(238, 238, 238, 0.9647058824);
   border-radius: 20%;
-  box-shadow: 1px 1px 10px rgba(204, 204, 204, 0.5);
+  box-shadow: 18px 18px 30px rgba(0, 0, 0, 0.2),
+    -5px -5px 10px rgba(255, 255, 255, 1);
+  transition: all 0.2s ease-out;
   margin: 2rem 1rem;
   cursor: pointer;
+}
+
+.totop:hover {
+  transform: scale(0.95);
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2), 0 0 0 rgba(255, 255, 255, 0.8),
+    inset 18px 18px 30px rgba(0, 0, 0, 0.1),
+    inset -18px -18px 30px rgba(255, 255, 255, 1);
 }
 .headDowm {
   /* text-align: center; */
@@ -534,6 +679,9 @@ $randomNumber: random(5);
   // margin-bottom: 0;
   box-sizing: content-box;
   animation: myicon-drowm 1s linear infinite alternate;
+}
+.showPhoneload {
+  display: none;
 }
 @keyframes myicon-drowm {
   0% {
@@ -558,8 +706,79 @@ $randomNumber: random(5);
   }
 }
 @media screen and (max-width: 530px) {
-  .home {
-    width: 400px;
+  .showload {
+    display: none;
+  }
+  .showPhoneload {
+    display: block;
+  }
+  .bkg {
+    margin-top: 3vh;
+    .home {
+      display: grid;
+      grid-template-columns: repeat(2, 48%);
+      column-gap: 2%;
+      margin-left: 2%;
+      .card {
+        // margin-left: 10%;
+        // margin-right: 2%;
+        display: flex;
+        flex-direction: column-reverse;
+        background-color: rgb(255, 255, 255);
+        box-shadow: none;
+        font-size: 12px;
+        .right {
+          display: block;
+          top: 0;
+          left: 0;
+          width: 100%;
+          .right_img {
+            width: 100%;
+            // object-fit: contain;
+            object-fit: fill;
+            // border-radius: 0;
+          }
+        }
+        .left {
+          top: 75%;
+          left: none;
+
+          width: 90%;
+          .timu {
+            font-size: 12px;
+            display: -webkit-box;
+            -webkit-line-clamp: 1;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: normal;
+            margin-bottom: 1%;
+          }
+          .text {
+            display: none;
+          }
+        }
+      }
+    }
+  }
+  p {
+    margin-bottom: 60px;
+  }
+  .balls {
+    margin: 40px auto 60px auto;
+  }
+  .icon-drowm {
+    left: 46%;
+  }
+  .phonexiangqing {
+    display: flex;
+    justify-content: space-between;
+    span {
+      display: flex;
+      svg {
+        margin: 3.3px 1px;
+      }
+    }
   }
 }
 </style>

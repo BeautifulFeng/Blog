@@ -1,12 +1,32 @@
 <!--
  * @Author: BeautifulFeng 11593811+beautifulfeng@user.noreply.gitee.com
  * @Date: 2023-06-28 03:10:51
- * @LastEditors: BeautifulFeng 11593811+beautifulfeng@user.noreply.gitee.com
- * @LastEditTime: 2023-06-29 19:05:51
+ * @LastEditors: JunFeng
+ * @LastEditTime: 2023-08-21 21:34:47
  * @FilePath: \my-blog\src\views\ariticle\reply\Forum.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
 <style scoped lang="scss">
+.content-text {
+  max-width: 700px;
+  word-wrap: break-word;
+}
+@media screen and (max-width: 1400px) {
+  .content-text {
+    max-width: 400px;
+  }
+}
+@media screen and (max-width: 900px) {
+  .content-text {
+    max-width: 300px;
+  }
+}
+@media screen and (max-width: 768px) {
+  .content-text {
+    max-width: 248px;
+  }
+}
+
 .Forum {
   border-bottom: 0.0625rem solid #efefef;
   margin-top: 1rem;
@@ -234,7 +254,7 @@
         </div>
         <!-- 回复的内容 -->
         <div class="Forum-content-text">
-          <p>{{ item.text }}</p>
+          <p class="content-text">{{ item.text }}</p>
         </div>
         <!-- 回复的时间与点赞 -->
         <div class="Forum-content-other">
@@ -280,7 +300,7 @@
                 ></path>
               </svg>
 
-              <div style="margin: 0px 0px 0px 2px;">{{ item.reply }}</div>
+              <div style="margin: 0px 0px 0px 2px">{{ item.reply }}</div>
             </button>
             <button class="givelike iconbutton">
               <svg
@@ -319,7 +339,7 @@
                   p-id="2279"
                 ></path>
               </svg>
-              <div style="margin: 0px 0px 0px 2px;">{{ item.good }}</div>
+              <div style="margin: 0px 0px 0px 2px">{{ item.good }}</div>
             </button>
           </div>
         </div>
@@ -498,42 +518,42 @@ const getreplyTwo = async (uid) => {
       users.data.find((u) => u.id === item.user_id)?.headimgurl ||
       "https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fsafe-img.xhscdn.com%2Fbw1%2F4bc638ef-a1b1-4fbb-bce8-e9184387d798%3FimageView2%2F2%2Fw%2F1080%2Fformat%2Fjpg&refer=http%3A%2F%2Fsafe-img.xhscdn.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1687972272&t=332aa322b014a1f0514f16b0a5678944";
     // 将字符串转换为数组
-    if(userStore.id){
-    const goodUserIds = item.good_userid.split(",");
-    // 判断当前用户的id是否在数组中
-    const currentUser = userStore.id.toString();
-    const isCurrentUserGood = goodUserIds.includes(currentUser);
-    // console.log(goodUserIds, currentUser);
-    // 输出结果
-    // console.log(isCurrentUserGood); // true 或者 false
-    return {
-      id: item.id,
-      text: item.text,
-      time: item.time,
-      reply: item.reply,
-      good: item.good,
-      user_id: user ? user.nickname : "未知用户", // 如果找到了用户，返回用户的昵称；否则，返回“未知用户”
-      other_id: other ? other.nickname : "未知用户", // 如果找到了用户，返回用户的昵称；否则，返回“未知用户”
-      imgurl: imgurl,
-      level: user ? user.level : "游客",
-      goodshow: isCurrentUserGood,
-    };
-  }else{
-    return {
-      id: item.id,
-      text: item.text,
-      time: item.time,
-      reply: item.reply,
-      good: item.good,
-      user_id: user ? user.nickname : "未知用户", // 如果找到了用户，返回用户的昵称；否则，返回“未知用户”
-      other_id: other ? other.nickname : "未知用户", // 如果找到了用户，返回用户的昵称；否则，返回“未知用户”
-      imgurl: imgurl,
-      level: user ? user.level : "游客",
-      goodshow: false,
-  }}
+    if (userStore.id) {
+      const goodUserIds = item.good_userid.split(",");
+      // 判断当前用户的id是否在数组中
+      const currentUser = userStore.id.toString();
+      const isCurrentUserGood = goodUserIds.includes(currentUser);
+      // console.log(goodUserIds, currentUser);
+      // 输出结果
+      // console.log(isCurrentUserGood); // true 或者 false
+      return {
+        id: item.id,
+        text: item.text,
+        time: item.time,
+        reply: item.reply,
+        good: item.good,
+        user_id: user ? user.nickname : "未知用户", // 如果找到了用户，返回用户的昵称；否则，返回“未知用户”
+        other_id: other ? other.nickname : "未知用户", // 如果找到了用户，返回用户的昵称；否则，返回“未知用户”
+        imgurl: imgurl,
+        level: user ? user.level : "游客",
+        goodshow: isCurrentUserGood,
+      };
+    } else {
+      return {
+        id: item.id,
+        text: item.text,
+        time: item.time,
+        reply: item.reply,
+        good: item.good,
+        user_id: user ? user.nickname : "未知用户", // 如果找到了用户，返回用户的昵称；否则，返回“未知用户”
+        other_id: other ? other.nickname : "未知用户", // 如果找到了用户，返回用户的昵称；否则，返回“未知用户”
+        imgurl: imgurl,
+        level: user ? user.level : "游客",
+        goodshow: false,
+      };
+    }
   });
   // console.log(replyTwo.value);
-
 };
 //获取任务
 const Tworeply = (item) => {
@@ -547,6 +567,10 @@ const replytext1cancel = () => {
 };
 //发送回复任务
 const replytext1send = async (item) => {
+  console.log(replytext1.value);
+  if (replytext1.value.toString().length > 60) {
+    return;
+  }
   const id = userStore.id;
   if (!localStorage.getItem("token") || !id) {
     ElMessage({
