@@ -10,27 +10,20 @@
 
 <script setup>
 import { ref, onMounted } from "vue";
-
+import canvasImg from "../../../assets/canvasimg.js";
 const warp = ref(null);
-const imgsUrl = ref([
+console.log(canvasImg);
+console.log(Object.values(canvasImg));
+const imgsUrl = ref(
+  Object.values(canvasImg)
+  // [
   // "/img/00021.png",
   // "/img/00023.png",
   // "/img/00024.png",
   // "/img/00025.png",
   // "/img/00026.png",
-  "../../../assets/img/00021.png",
-  "../../../assets/img/00023.png",
-  "../../../assets/img/00024.png",
-  "../../../assets/img/00025.png",
-  "../../../assets/img/00026.png",
-  // "/img/1.jpg",
-  // "/img/2.jpg",
-  // "/img/3.jpg",
-  // "/img/00023.png",
-  // "/img/00024.png",
-  // "/img/00025.png",
-  // "/img/00026.png",
-]);
+  // ]
+);
 const radius = ref(1);
 
 class Particale {
