@@ -1,8 +1,7 @@
 <template>
   <div v-infinite-scroll="load" :infinite-scroll-disabled="disabled">
-    <keep-alive>
-      <lizi></lizi>
-    </keep-alive>
+    <lizi></lizi>
+
     <div class="headDowm">
       <div class="icon-drowm" @click="Lookartcal">
         <svg
@@ -274,19 +273,18 @@
       <!-- <div v-if="loading">Loading...</div> -->
       <div class="rightFather">
         <div class="rightcontent">
-          <keep-alive>
-            <div class="musicCloud">
-              <iframe
-                frameborder="no"
-                border="0"
-                marginwidth="0"
-                marginheight="0"
-                width="280"
-                height="100"
-                src="//music.163.com/outchain/player?type=2&id=441491410&auto=1&height=66"
-              ></iframe>
-            </div>
-          </keep-alive>
+          <div class="musicCloud">
+            <iframe
+              frameborder="no"
+              border="0"
+              marginwidth="0"
+              marginheight="0"
+              width="280"
+              height="100"
+              src="//music.163.com/outchain/player?type=2&id=441491410&auto=0&height=66"
+            ></iframe>
+          </div>
+
           <div class="upmsg">
             <UpMsg />
           </div>

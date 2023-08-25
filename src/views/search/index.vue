@@ -5,7 +5,8 @@ $randomNumber: random(5);
   display: flex;
   justify-content: center;
   position: relative;
-  height: calc(100vh - 60px);
+  // height: calc(100vh - 60px);
+  min-height: calc(100vh - 1vw);
   // flex-direction: column;
 }
 
@@ -330,9 +331,8 @@ $randomNumber: random(5);
 </style>
 
 <template>
-  <keep-alive>
-    <lizi></lizi>
-  </keep-alive>
+  <lizi></lizi>
+
   <div class="headDowm">
     <div class="icon-drowm" @click="Lookartcal">
       <svg
@@ -505,19 +505,17 @@ $randomNumber: random(5);
     <!-- <div v-if="loading">Loading...</div> -->
     <div class="rightFather">
       <div class="rightcontent">
-        <keep-alive>
-          <div class="musicCloud">
-            <iframe
-              frameborder="no"
-              border="0"
-              marginwidth="0"
-              marginheight="0"
-              width="280"
-              height="100"
-              src="//music.163.com/outchain/player?type=2&id=441491410&auto=1&height=66"
-            ></iframe>
-          </div>
-        </keep-alive>
+        <div class="musicCloud">
+          <iframe
+            frameborder="no"
+            border="0"
+            marginwidth="0"
+            marginheight="0"
+            width="280"
+            height="100"
+            src="//music.163.com/outchain/player?type=2&id=441491410&auto=0&height=66"
+          ></iframe>
+        </div>
         <div class="upmsg" id="upmsg">
           <UpMsg />
         </div>
@@ -612,6 +610,10 @@ const Totop = () => {
 const Lookartcal = () => {
   const bkg = document.getElementById("bkg");
   console.log(bkg);
+  console.log(bkg.offsetTop);
+  console.log(bkg.offsetHeight);
+  console.log(bkg.scrollHeight);
+  console.log(bkg.scrollTop);
   if (bkg) {
     window.scrollTo({
       top: bkg.offsetTop - 60,
@@ -620,21 +622,6 @@ const Lookartcal = () => {
   }
 };
 onMounted(() => {
-  // const Lookupmsg = () => {
-  //   console.log(1);
-  //   const bkg = document.getElementById("upmsg");
-  //   console.log(bkg);
-  //   if (bkg) {
-  //     window.scrollTo({
-  //       top: document.documentElement.scrollHeight,
-  //       behavior: "smooth",
-  //     });
-  //   }
-  // };
-  // Lookupmsg();
-  window.scrollTo({
-    top: document.documentElement.scrollHeight,
-    behavior: "smooth",
-  });
+  Lookartcal();
 });
 </script>

@@ -338,8 +338,12 @@
     </div>
     <div style="margin-top: 2vh">其他方式登录</div>
     <div style="margin-top: 1vh">
-      <img src="/img/微信登录.png" @click="GoTobaidu" class="Other" />
-      <img src="/img/qq登录.png" style="margin-left: 2.8vw" class="Other" />
+      <img src="../assets/img/微信登录.png" @click="GoTobaidu" class="Other" />
+      <img
+        src="../assets/img/qq登录.png"
+        style="margin-left: 2.8vw"
+        class="Other"
+      />
     </div>
   </el-dialog>
 </template>
