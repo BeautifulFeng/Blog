@@ -58,6 +58,9 @@
   font-weight: 600;
   color: black;
 }
+.content-p {
+  max-width: 256px;
+}
 </style>
 
 <template>
@@ -65,7 +68,9 @@
     <div class="up-back">
       <div>
         <p style="color: #1e73be">2023-8-17</p>
-        <p>新增主页canvas动画，loading效果，优化体验</p>
+        <p class="content-p">
+          新增主页canvas粒子像素效果，loading效果，优化体验
+        </p>
       </div>
 
       <div class="up-content">
